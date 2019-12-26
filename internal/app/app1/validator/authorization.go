@@ -1,14 +1,14 @@
 package validator
 
 import (
-	"github.com/pepeunlimited/rpc-starter-kit/rpc"
+
 )
 
-type TodoServerValidator struct {}
+type AuthorizationServerValidator struct {}
 
 
-func NewTodoServerValidator() TodoServerValidator {
-	return TodoServerValidator{}
+func NewAuthorizationServerValidator() AuthorizationServerValidator {
+	return AuthorizationServerValidator{}
 }
 
 func (TodoServerValidator) CreateTodo(params *rpc.CreateTodoParams) error {

@@ -1,3 +1,3 @@
 package rpc
 
-const RpcTodoHost = "RPC_TODO_HOST"
+const RpcAuthorizationHost = "RPC_AUTHORIZATION_HOST"

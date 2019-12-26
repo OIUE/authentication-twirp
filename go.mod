@@ -1,4 +1,4 @@
-module github.com/pepeunlimited/rpc-starter-kit
+module github.com/pepeunlimited/authorization-twirp
 
 go 1.13
 
