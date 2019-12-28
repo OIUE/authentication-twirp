@@ -30,6 +30,6 @@ func (m *Mock) Verify(ctx context.Context, params *VerifyParams) (*VerifyRespons
 	return nil, m.Errors.Pop()
 }
 
-func NewAuthorizationMock() AuthorizationService {
-	return &Mock{}
+func NewAuthorizationMock(errors []error) AuthorizationService {
+	return &Mock{Errors:errorz.NewErrorStack(errors)}
 }
