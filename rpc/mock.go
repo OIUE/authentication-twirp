@@ -9,15 +9,15 @@ type Mock struct {
 	Errors 		errorz.Stack
 }
 
-func (m Mock) SignIn(ctx context.Context, params *SignInParams) (*SignInResponse, error) {
+func (m *Mock) SignIn(ctx context.Context, params *SignInParams) (*SignInResponse, error) {
 	return nil, nil
 }
 
-func (m Mock) Refresh(ctx context.Context, parmas *RefreshParams) (*RefreshResponse, error) {
+func (m *Mock) Refresh(ctx context.Context, parmas *RefreshParams) (*RefreshResponse, error) {
 	return nil, nil
 }
 
-func (m Mock) Verify(ctx context.Context, params *VerifyParams) (*VerifyResponse, error) {
+func (m *Mock) Verify(ctx context.Context, params *VerifyParams) (*VerifyResponse, error) {
 	if m.Errors.IsEmpty() {
 		return &VerifyResponse{
 			Username:             "kakkaliisa",
@@ -30,5 +30,6 @@ func (m Mock) Verify(ctx context.Context, params *VerifyParams) (*VerifyResponse
 	return nil, m.Errors.Pop()
 }
 
-
-
+func NewAuthorizationMock() AuthorizationService {
+	return &Mock{}
+}
