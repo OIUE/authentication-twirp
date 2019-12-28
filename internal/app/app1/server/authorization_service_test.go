@@ -2,29 +2,41 @@ package server
 
 import (
 	"context"
-	"github.com/pepeunlimited/rpc-starter-kit/rpc"
+	"fmt"
+	rpc2 "github.com/pepeunlimited/authorization-twirp/rpc"
+	"github.com/pepeunlimited/microservice-kit/validator"
+	"github.com/pepeunlimited/users/rpc"
 	"testing"
-	"time"
 )
 
-func TestTodoServer_CreateTodo(t *testing.T) {
-	server := NewTodoServer()
-	todo, err := server.CreateTodo(context.TODO(), &rpc.CreateTodoParams{Todo: &rpc.Todo{
-		Name:      "HelloWorld!",
-		IsDone:    true,
-		CreatedAt: time.Now().UTC().Format(time.RFC3339),
-		UpdatedAt: time.Now().UTC().Format(time.RFC3339),
-		IsDeleted: false,
-		Id:        1,
-	}})
+var secret string = "s3cr3t"
+
+func TestAuthorizationServer_SignIn(t *testing.T) {
+	server := NewAuthorizationServer(secret, rpc.NewUserServiceMock(nil, false))
+	resp, err := server.SignIn(context.TODO(), &rpc2.SignInParams{
+		Username: "kakkaliisa",
+		Password: "siimoo",
+	})
 	if err != nil {
 		t.Error(err)
 		t.FailNow()
 	}
-	if server.todos[1] == nil {
+	if validator.IsEmpty(resp.Token) {
 		t.FailNow()
 	}
-	if server.todos[1].Name != todo.Name {
+}
+
+func TestAuthorizationServer_SignInError(t *testing.T) {
+	server := NewAuthorizationServer(secret, rpc.NewUserServiceMock([]error{fmt.Errorf("custom-error")}, false))
+	resp, err := server.SignIn(context.TODO(), &rpc2.SignInParams{
+		Username: "kakkaliisa",
+		Password: "siimoo",
+	})
+	if err != nil {
+		t.Error(err)
+		t.FailNow()
+	}
+	if validator.IsEmpty(resp.Token) {
 		t.FailNow()
 	}
 }
