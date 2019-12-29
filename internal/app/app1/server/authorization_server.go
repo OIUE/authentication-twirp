@@ -45,11 +45,11 @@ func (server AuthorizationServer) Refresh(ctx context.Context, params *rpc.Refre
 }
 
 func (server AuthorizationServer) Verify(ctx context.Context, params *rpc.VerifyParams) (*rpc.VerifyResponse, error) {
-	token, err := rpcz.GetAuthorizationWithoutPrefix(ctx)
+	err := server.validator.Verify(params)
 	if err != nil {
-		return nil, twirp.RequiredArgumentError("Authorization")
+		return nil, err
 	}
-	claims, err := server.jwt.VerifyCustomClaims(token)
+	claims, err := server.jwt.VerifyCustomClaims(params.Token)
 	if err != nil {
 		switch err {
 		case jwt.ErrExpired:
