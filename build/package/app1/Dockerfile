@@ -4,7 +4,7 @@
 FROM golang:1.13.4-alpine as build
 
 # Set the Current Working Directory inside the container
-WORKDIR $GOPATH/src/github.com/pepeunlimited/grpc-starter-kit
+WORKDIR $GOPATH/src/github.com/pepeunlimited/authorization-twirp
 
 # Copy everything from the current directory to the PWD(Present Working Directory) inside the container
 COPY . .
@@ -23,11 +23,11 @@ RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o /go/bin/app1 ./cm
 ###############################################
 FROM alpine:latest as final
 
-LABEL description="Show case of the using docker hub."
+LABEL description=""
 # This is intended to be run from the hooks/build script, which sets this
 # appropriately based on git tags.
 ARG version
-LABEL com.pepeunlimited.grpcstarterkit.version=$version
+LABEL com.pepeunlimited.authorizationtwirp.version=$version
 
 # Add Maintainer Info
 LABEL maintainer="Simo Ala-Kotila <simo.alakotila@gmail.com>"

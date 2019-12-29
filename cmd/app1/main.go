@@ -20,7 +20,7 @@ func main() {
 	log.Printf("Starting the authorization... version=[%v]", Version)
 
 	secret := misc.GetEnv(jwt.SECRET_KEY, "v3ry-s3cr3t-k3y")
-	usersAddress := misc.GetEnv(rpc2.RpcUsersHost, "http://localhost:8081")
+	usersAddress := misc.GetEnv(rpc2.RpcUsersHost, "http://localhost:8080")
 
 	as := rpc.NewAuthorizationServiceServer(server.NewAuthorizationServer(secret,
 		rpc2.NewUserServiceProtobufClient(usersAddress,http.DefaultClient)), nil)

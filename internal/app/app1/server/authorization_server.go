@@ -59,12 +59,17 @@ func (server AuthorizationServer) Verify(ctx context.Context, params *rpc.Verify
 		}
 		return nil, twirp.NewError(twirp.Internal, err.Error()).WithMeta(rpcz.Reason, rpc.JwtUnknownError)
 	}
-	return &rpc.VerifyResponse{
-		Username:             claims.Username,
-		Email:                *claims.Email,
-		UserId:               *claims.UserId,
-		Roles:                claims.Roles,
-	}, nil
+	resp := &rpc.VerifyResponse{
+		Username: claims.Username,
+		Roles:    claims.Roles,
+	}
+	if claims.Email != nil {
+		resp.Email = *claims.Email
+	}
+	if claims.UserId != nil {
+		resp.UserId = *claims.UserId
+	}
+	return resp, nil
 }
 
 func NewAuthorizationServer(secret string, userService rpc2.UserService) AuthorizationServer {

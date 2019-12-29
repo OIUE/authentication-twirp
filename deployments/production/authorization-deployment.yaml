@@ -1,0 +1,28 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: authorization-twirp
+  labels:
+    app: authorization-twirp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: authorization-twirp
+  template:
+    metadata:
+      labels:
+        app: authorization-twirp
+    spec:
+      containers:
+        - env:
+            - name: RPC_USERS_HOST
+              value: http://users.default.svc
+            - name: JWT_SECRET_KEY
+              value: v3ry-s3cr3t-k3y-666
+          image: pepeunlimited/authorization-twirp:0.1
+          name: authorization-twirp
+          ports:
+            - containerPort: 8080
+          resources: {}
+      restartPolicy: Always
