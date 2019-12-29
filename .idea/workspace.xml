@@ -1,27 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a1e4a88c-dc40-49e6-b550-c4f666b3c047" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/package/app1/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/build/package/app1/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/app1/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/app1/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/deployments/dev/external-mysql-service.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/deployments/dev/users-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/deployments/dev/authorization-deployment.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/deployments/dev/users-ingress.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/deployments/dev/authorization-ingress.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/deployments/dev/users-service.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/deployments/dev/authorization-service.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/deployments/production/app-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/deployments/production/authorization-deployment.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/deployments/production/app-ingress.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/deployments/production/authorization-ingress.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/deployments/production/app-service.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/deployments/production/authorization-service.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/deployments/staging/app-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/deployments/staging/authorization-deployment.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/deployments/staging/app-ingress.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/deployments/staging/authorization-ingress.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/deployments/staging/app-service.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/deployments/staging/authorization-service.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/app/app1/server/authorization_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/app/app1/server/authorization_server.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/app/app1/server/authorization_service_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/app/app1/server/authorization_service_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc/protobuf" beforeDir="false" afterPath="$PROJECT_DIR$/rpc/protobuf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/release/build.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/release/build.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/release/push.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/release/push.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/release/tag.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/release/tag.sh" afterDir="false" />
-    </list>
+    <list default="true" id="a1e4a88c-dc40-49e6-b550-c4f666b3c047" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
