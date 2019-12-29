@@ -22,7 +22,7 @@ func (server AuthorizationServer) SignIn(ctx context.Context, params *rpc.SignIn
 	if err != nil {
 		return nil, err
 	}
-	// verify from users-service
+	// verify does the user exist and etc from users-service
 	user, err := server.userService.VerifySignIn(ctx, &rpc2.VerifySignInParams{
 		Username: params.Username,
 		Password: params.Password,
@@ -45,17 +45,17 @@ func (server AuthorizationServer) Refresh(ctx context.Context, params *rpc.Refre
 }
 
 func (server AuthorizationServer) Verify(ctx context.Context, params *rpc.VerifyParams) (*rpc.VerifyResponse, error) {
-	err := server.validator.Verify(params)
+	token, err := rpcz.GetAuthorizationWithoutPrefix(ctx)
 	if err != nil {
-		return nil, err
+		return nil, twirp.RequiredArgumentError("Authorization")
 	}
-	claims, err := server.jwt.VerifyCustomClaims(params.Token)
+	claims, err := server.jwt.VerifyCustomClaims(token)
 	if err != nil {
 		switch err {
 		case jwt.ErrExpired:
-			return nil, twirp.NewError(twirp.Internal, err.Error()).WithMeta(rpcz.Reason, rpc.JwtExpired)
+			return nil, twirp.NewError(twirp.Unauthenticated, err.Error()).WithMeta(rpcz.Reason, rpc.JwtExpired)
 		case jwt.ErrMalformed:
-			return nil, twirp.NewError(twirp.Internal, err.Error()).WithMeta(rpcz.Reason, rpc.JwtMalformed)
+			return nil, twirp.NewError(twirp.Malformed, err.Error()).WithMeta(rpcz.Reason, rpc.JwtMalformed)
 		}
 		return nil, twirp.NewError(twirp.Internal, err.Error()).WithMeta(rpcz.Reason, rpc.JwtUnknownError)
 	}

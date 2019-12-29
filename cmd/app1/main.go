@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/pepeunlimited/authorization-twirp/internal/app/app1/server"
 	"github.com/pepeunlimited/authorization-twirp/rpc"
+	"github.com/pepeunlimited/microservice-kit/headers"
 	"github.com/pepeunlimited/microservice-kit/jwt"
 	"github.com/pepeunlimited/microservice-kit/middleware"
 	"github.com/pepeunlimited/microservice-kit/misc"
@@ -24,7 +25,7 @@ func main() {
 	as := rpc.NewAuthorizationServiceServer(server.NewAuthorizationServer(secret,
 		rpc2.NewUserServiceProtobufClient(usersAddress,http.DefaultClient)), nil)
 	mux := http.NewServeMux()
-	mux.Handle(as.PathPrefix(), middleware.Adapt(as))
+	mux.Handle(as.PathPrefix(), middleware.Adapt(as, headers.Authorizationz()))
 
 	if err := http.ListenAndServe(":8080", mux); err != nil {
 		log.Panic(err)
