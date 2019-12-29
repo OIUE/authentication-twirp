@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a1e4a88c-dc40-49e6-b550-c4f666b3c047" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc/authorization.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/rpc/authorization.pb.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc/authorization.twirp.go" beforeDir="false" afterPath="$PROJECT_DIR$/rpc/authorization.twirp.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/app/app1/server/authorization_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/app/app1/server/authorization_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/app/app1/server/authorization_service_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/app/app1/server/authorization_service_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc/protobuf" beforeDir="false" afterPath="$PROJECT_DIR$/rpc/protobuf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rpc/protobuf/authorization.proto" beforeDir="false" afterPath="$PROJECT_DIR$/rpc/protobuf/authorization.proto" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -24,7 +24,7 @@
   </component>
   <component name="GOROOT" path="/usr/local/Cellar/go/1.13.4/libexec" />
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/rpc/protobuf" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GoLibraries">
     <option name="indexEntireGoPath" value="false" />
@@ -240,22 +240,22 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="519" y="153" key="#TestTodoServer_CreateTodo_in_bitbucket.com/siimooo/go-starter-kit-k8/internal/app/app1/server/0.0.1680.1050@0.0.1680.1050" timestamp="1576350803089" />
-    <state width="1638" height="487" key="GridCell.Tab.0.bottom" timestamp="1577613170689">
+    <state width="1638" height="487" key="GridCell.Tab.0.bottom" timestamp="1577615838057">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="487" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1577613170689" />
-    <state width="1638" height="487" key="GridCell.Tab.0.center" timestamp="1577613170686">
+    <state width="1638" height="487" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1577615838057" />
+    <state width="1638" height="487" key="GridCell.Tab.0.center" timestamp="1577615838053">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="487" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1577613170686" />
-    <state width="1638" height="487" key="GridCell.Tab.0.left" timestamp="1577613170683">
+    <state width="1638" height="487" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1577615838053" />
+    <state width="1638" height="487" key="GridCell.Tab.0.left" timestamp="1577615838052">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="487" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1577613170683" />
-    <state width="1638" height="487" key="GridCell.Tab.0.right" timestamp="1577613170687">
+    <state width="1638" height="487" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1577615838052" />
+    <state width="1638" height="487" key="GridCell.Tab.0.right" timestamp="1577615838055">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="487" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1577613170687" />
+    <state width="1638" height="487" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1577615838055" />
     <state width="1638" height="363" key="GridCell.Tab.1.bottom" timestamp="1577612457834">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
@@ -296,11 +296,6 @@
           <url>file:///usr/local/Cellar/go/1.12.2/libexec/src/database/sql/sql.go</url>
           <line>3051</line>
           <option name="timeStamp" value="24" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/internal/app/app1/server/authorization_server.go</url>
-          <line>25</line>
-          <option name="timeStamp" value="31" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

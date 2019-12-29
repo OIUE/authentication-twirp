@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	rpc2 "github.com/pepeunlimited/authorization-twirp/rpc"
-	"github.com/pepeunlimited/microservice-kit/rpcz"
 	"github.com/pepeunlimited/microservice-kit/validator"
 	"github.com/pepeunlimited/users/rpc"
 	"log"
@@ -27,8 +26,7 @@ func TestAuthorizationServer_SignIn(t *testing.T) {
 	if validator.IsEmpty(resp0.Token) {
 		t.FailNow()
 	}
-	ctx = rpcz.AddAuthorization(resp0.Token)
-	resp1, err := server.Verify(ctx, &rpc2.VerifyParams{})
+	resp1, err := server.Verify(ctx, &rpc2.VerifyParams{Token:resp0.Token})
 	log.Print(resp1)
 }
 
