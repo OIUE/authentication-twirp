@@ -17,7 +17,7 @@ const (
 )
 
 func main() {
-	log.Printf("Starting the authorization... version=[%v]", Version)
+	log.Printf("Starting the authorization-twirp... version=[%v]", Version)
 
 	secret := misc.GetEnv(jwt.SECRET_KEY, "v3ry-s3cr3t-k3y")
 	usersAddress := misc.GetEnv(rpc2.RpcUsersHost, "http://localhost:8080")

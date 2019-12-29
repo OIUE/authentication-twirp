@@ -6,7 +6,7 @@
 ##### SignIn
 ```
 $ curl -H "Content-Type: application/json" \
- -X POST "localhost:8080/twirp/pepeunlimited.authorization.AuthorizationService/SignIn" \
+ -X POST "http://api.dev.pepeunlimited.com/twirp/pepeunlimited.authorization.AuthorizationService/SignIn" \
  -d '{"username": "kakkaliisa", "password": "p4sw0rd"}'
 ```
 ##### SignIn
