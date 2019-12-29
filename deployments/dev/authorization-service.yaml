@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: users
+  name: authorization-twirp
 spec:
   ports:
     - protocol: TCP
