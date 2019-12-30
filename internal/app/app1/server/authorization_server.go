@@ -8,6 +8,7 @@ import (
 	"github.com/pepeunlimited/microservice-kit/rpcz"
 	rpc2 "github.com/pepeunlimited/users/rpc"
 	"github.com/twitchtv/twirp"
+	"log"
 	"time"
 )
 
@@ -18,6 +19,7 @@ type AuthorizationServer struct {
 }
 
 func (server AuthorizationServer) SignIn(ctx context.Context, params *rpc.SignInParams) (*rpc.SignInResponse, error) {
+	log.Printf("sign-in: %s", params)
 	err := server.validator.SignIn(params)
 	if err != nil {
 		return nil, err
@@ -45,6 +47,7 @@ func (server AuthorizationServer) Refresh(ctx context.Context, params *rpc.Refre
 }
 
 func (server AuthorizationServer) Verify(ctx context.Context, params *rpc.VerifyParams) (*rpc.VerifyResponse, error) {
+	log.Printf("verify: %s", params)
 	err := server.validator.Verify(params)
 	if err != nil {
 		return nil, err
