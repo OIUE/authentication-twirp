@@ -23,7 +23,7 @@ func (server AuthorizationServer) RefreshAccessToken(ctx context.Context, params
 }
 
 func (server AuthorizationServer) VerifyAccessToken(ctx context.Context, params *rpc.VerifyAccessTokenParams) (*rpc.VerifyAccessTokenResponse, error) {
-	err := server.validator.Verify(params)
+	err := server.validator.VerifyAccessToken(params)
 	if err != nil {
 		return nil, err
 	}

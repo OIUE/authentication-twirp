@@ -23,14 +23,14 @@ func (AuthorizationServerValidator) SignIn(params *rpc.SignInParams) error {
 	return nil
 }
 
-func (AuthorizationServerValidator) Refresh(params *rpc.RefreshParams) error {
+func (AuthorizationServerValidator) RefreshAccessToken(params *rpc.RefreshAccessTokenParams) error {
 	if validator.IsEmpty(params.RefreshToken) {
 		return twirp.RequiredArgumentError("refresh_token")
 	}
 	return nil
 }
 
-func (AuthorizationServerValidator) Verify(params *rpc.VerifyParams) error {
+func (AuthorizationServerValidator) VerifyAccessToken(params *rpc.VerifyAccessTokenParams) error {
 	if validator.IsEmpty(params.AccessToken) {
 		return twirp.RequiredArgumentError("access_token")
 	}

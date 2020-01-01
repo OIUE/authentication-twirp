@@ -28,7 +28,7 @@ func TestAuthorizationServer_SignIn(t *testing.T) {
 	if validator.IsEmpty(resp0.AccessToken) {
 		t.FailNow()
 	}
-	resp1, err := server.Verify(ctx, &rpc2.VerifyParams{AccessToken:resp0.AccessToken})
+	resp1, err := server.VerifyAccessToken(ctx, &rpc2.VerifyAccessTokenParams{AccessToken:resp0.AccessToken})
 	log.Print(resp1)
 }
 
@@ -49,7 +49,7 @@ func TestAuthorizationServer_VerifyExpired(t *testing.T) {
 	ctx := context.TODO()
 	token, err := server.jwt.SignIn(1*time.Second, "username", nil, []string{"User"}, nil)
 	time.Sleep(2 * time.Second)
-	_, err = server.Verify(ctx, &rpc2.VerifyParams{AccessToken: token})
+	_, err = server.VerifyAccessToken(ctx, &rpc2.VerifyAccessTokenParams{AccessToken: token})
 	if err == nil {
 		t.FailNow()
 	}
@@ -62,7 +62,7 @@ func TestAuthorizationServer_VerifyMalformed(t *testing.T) {
 	server := NewAuthorizationServer(secret, rpc.NewUserServiceMock(nil, false))
 	ctx := context.TODO()
 	token := "eyJhbGciOiJIUzI1NIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNpaW1vbyIsImtYWlsIjoic2ltb29AZ21haWwuY29tIiwicm9sZXMiOlsidXNlciJdLCJ1c2VyX2lkIjozLCJleHAiOjE1Nzc2MTczOTR9.AC7mkWENKOwHdZWkbD0QaBR1mMhxR1mo8PKztwQ47qA"
-	_, err := server.Verify(ctx, &rpc2.VerifyParams{AccessToken: token})
+	_, err := server.VerifyAccessToken(ctx, &rpc2.VerifyAccessTokenParams{AccessToken: token})
 	if err == nil {
 		t.FailNow()
 	}
@@ -91,7 +91,7 @@ func TestAuthorizationServer_SignInCantAccessUserService(t *testing.T) {
 	server := NewAuthorizationServer(secret, rpc.NewUserServiceMock([]error{fmt.Errorf("asd")}, false))
 	ctx := context.TODO()
 	token,_ := server.jwt.SignIn(2*time.Second, "username", nil, []string{"User"}, nil)
-	_, err := server.Verify(ctx, &rpc2.VerifyParams{AccessToken:token})
+	_, err := server.VerifyAccessToken(ctx, &rpc2.VerifyAccessTokenParams{AccessToken:token})
 	if err != nil {
 		t.Error(err)
 		t.FailNow()
