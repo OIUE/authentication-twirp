@@ -113,7 +113,7 @@ func (server AuthorizationServer) SignIn(ctx context.Context, params *rpc.SignIn
 		return nil, twirp.InternalErrorWith(err)
 	}
 	// refresh token is valid 31d's
-	refreshToken, err := server.accessToken.SignIn(refreshTokenExp, user.Username, &user.Email, user.Roles, &user.Id)
+	refreshToken, err := server.refreshToken.SignIn(refreshTokenExp, user.Username, &user.Email, user.Roles, &user.Id)
 	if err != nil {
 		log.Print("authorization-twirp: unknown error during refreshToken: "+err.Error())
 		return nil, twirp.InternalErrorWith(err)

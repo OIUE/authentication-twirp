@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-var secret1 string = "s3cr3t-1"
+var secret1 string = "s3cr3t"
 var secret2 string = "s3cr3t-2"
 
 func TestAuthorizationServer_SignIn(t *testing.T) {
@@ -58,7 +58,7 @@ func TestAuthorizationServer_VerifyExpired(t *testing.T) {
 	if err == nil {
 		t.FailNow()
 	}
-	if err.(twirp.Error).Meta("reason") != "jwt_expired" {
+	if err.(twirp.Error).Meta("reason") != "access_token_expired" {
 		t.FailNow()
 	}
 }
@@ -71,7 +71,7 @@ func TestAuthorizationServer_VerifyMalformed(t *testing.T) {
 	if err == nil {
 		t.FailNow()
 	}
-	if err.(twirp.Error).Meta("reason") != "jwt_malformed" {
+	if err.(twirp.Error).Meta("reason") != "access_token_malformed" {
 		t.Error(err)
 		t.FailNow()
 	}
