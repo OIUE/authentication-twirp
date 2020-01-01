@@ -21,11 +21,14 @@ type AuthorizationServer struct {
 
 const (
 	accessTokenExp 		time.Duration = 10*time.Minute
-	refreshTokenExp 	time.Duration = (24*time.Hour) * 2 // 31
-	newRefreshToken     time.Duration = (24*time.Hour) * 1 // 7
+	refreshTokenExp 	time.Duration = (24*time.Hour) * 31 // 31
+	newRefreshToken     time.Duration = (24*time.Hour) * 7 // 7
 )
 
 func (server AuthorizationServer) RefreshAccessToken(ctx context.Context, params *rpc.RefreshAccessTokenParams) (*rpc.RefreshAccessTokenResponse, error) {
+	if err := server.validator.RefreshAccessToken(params); err != nil {
+		return nil, err
+	}
 	claims, err := server.refreshToken.VerifyCustomClaims(params.RefreshToken)
 	if err != nil {
 		return nil, server.isRefreshTokenError(err)

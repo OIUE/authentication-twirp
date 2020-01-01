@@ -9,9 +9,15 @@ $ curl -H "Content-Type: application/json" \
  -X POST "http://api.dev.pepeunlimited.com/twirp/pepeunlimited.authorization.AuthorizationService/SignIn" \
  -d '{"username": "kakkaliisa", "password": "p4sw0rd"}'
 ```
-##### VerifySignIn
+##### VerifyAccessToken
 ```
-$ curl -H "Content-Type: application/json" -H "Authorization: Bearer REPLACE_WITH_TOKEN" \
- -X POST "localhost:8080/twirp/pepeunlimited.authorization.AuthorizationService/SignIn" \
- -d '{"standard_vat": "24.00"}'
+$ curl -H "Content-Type: application/json" \
+ -X POST "api.dev.pepeunlimited.com/twirp/pepeunlimited.authorization.AuthorizationService/VerifyAccessToken" \
+ -d '{"access_token": "24.00"}'
+```
+##### RefreshAccessToken
+```
+$ curl -H "Content-Type: application/json" \
+ -X POST "api.dev.pepeunlimited.com/twirp/pepeunlimited.authorization.AuthorizationService/RefreshAccessToken" \
+ -d '{"refresh_token": "24.00"}'
 ```

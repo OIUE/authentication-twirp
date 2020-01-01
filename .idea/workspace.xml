@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="a1e4a88c-dc40-49e6-b550-c4f666b3c047" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.md" beforeDir="false" afterPath="$PROJECT_DIR$/API.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/app/app1/server/authorization_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/app/app1/server/authorization_server.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/app/app1/server/authorization_service_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/app/app1/server/authorization_service_test.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,10 +162,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Go Test.TestAuthorizationServer_RefreshAccessToken in github.com/pepeunlimited/authorization-twirp/internal/app/app1/server" />
+        <item itemvalue="Go Test.authorization_service_test.go" />
         <item itemvalue="Go Test.TestAuthorizationServer_SignIn in github.com/pepeunlimited/authorization-twirp/internal/app/app1/server" />
         <item itemvalue="Go Build.go build main.go" />
         <item itemvalue="Go Test.TestAuthorizationServer_VerifyMalformed in github.com/pepeunlimited/authorization-twirp/internal/app/app1/server" />
-        <item itemvalue="Go Test.authorization_service_test.go" />
       </list>
     </recent_temporary>
   </component>
@@ -246,22 +246,22 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="619" y="241" key="#com.intellij.ide.util.MemberChooser/0.0.1680.1050@0.0.1680.1050" timestamp="1577905248742" />
-    <state width="1638" height="487" key="GridCell.Tab.0.bottom" timestamp="1577906270613">
+    <state width="1638" height="487" key="GridCell.Tab.0.bottom" timestamp="1577908368581">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="487" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1577906270613" />
-    <state width="1638" height="487" key="GridCell.Tab.0.center" timestamp="1577906270612">
+    <state width="1638" height="487" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1577908368581" />
+    <state width="1638" height="487" key="GridCell.Tab.0.center" timestamp="1577908368579">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="487" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1577906270612" />
-    <state width="1638" height="487" key="GridCell.Tab.0.left" timestamp="1577906270611">
+    <state width="1638" height="487" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1577908368579" />
+    <state width="1638" height="487" key="GridCell.Tab.0.left" timestamp="1577908368577">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="487" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1577906270611" />
-    <state width="1638" height="487" key="GridCell.Tab.0.right" timestamp="1577906270613">
+    <state width="1638" height="487" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1577908368577" />
+    <state width="1638" height="487" key="GridCell.Tab.0.right" timestamp="1577908368580">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="487" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1577906270613" />
+    <state width="1638" height="487" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1577908368580" />
     <state width="1638" height="363" key="GridCell.Tab.1.bottom" timestamp="1577616678291">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
