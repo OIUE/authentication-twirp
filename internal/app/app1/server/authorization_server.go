@@ -21,8 +21,8 @@ type AuthorizationServer struct {
 
 const (
 	accessTokenExp 		time.Duration = 10*time.Minute
-	refreshTokenExp 	time.Duration = (24*time.Hour) * 31 // 31
-	newRefreshToken     time.Duration = (24*time.Hour) * 7 // 7
+	refreshTokenExp 	time.Duration = (24*time.Hour) * 2 // 31
+	newRefreshToken     time.Duration = (24*time.Hour) * 1 // 7
 )
 
 func (server AuthorizationServer) RefreshAccessToken(ctx context.Context, params *rpc.RefreshAccessTokenParams) (*rpc.RefreshAccessTokenResponse, error) {
@@ -53,7 +53,10 @@ func (server AuthorizationServer) RefreshAccessToken(ctx context.Context, params
 }
 
 func (server AuthorizationServer) isRefreshToken(expiresAt time.Time, before time.Duration) bool {
-	return expiresAt.UTC().Before(time.Now().UTC().Add(before))
+	newRefreshTokenAt := expiresAt.UTC().Add(-before)
+	//log.Print(newRefreshTokenAt)
+	//log.Print(time.Date(2020, 1,25, 22,28,0,0, time.UTC).After(expiresAt))
+	return time.Now().UTC().After(newRefreshTokenAt)
 }
 
 func (server AuthorizationServer) VerifyAccessToken(ctx context.Context, params *rpc.VerifyAccessTokenParams) (*rpc.VerifyAccessTokenResponse, error) {
