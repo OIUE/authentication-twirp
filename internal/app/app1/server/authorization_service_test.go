@@ -28,8 +28,12 @@ func TestAuthorizationServer_SignIn(t *testing.T) {
 	if validator.IsEmpty(resp0.AccessToken) {
 		t.FailNow()
 	}
-	resp1, err := server.VerifyAccessToken(ctx, &rpc2.VerifyAccessTokenParams{AccessToken:resp0.AccessToken})
-	log.Print(resp1)
+	log.Print(resp0)
+	_, err = server.VerifyAccessToken(ctx, &rpc2.VerifyAccessTokenParams{AccessToken:resp0.AccessToken})
+	if err != nil {
+		t.Error(err)
+		t.FailNow()
+	}
 }
 
 func TestAuthorizationServer_SignInError(t *testing.T) {
@@ -47,7 +51,7 @@ func TestAuthorizationServer_SignInError(t *testing.T) {
 func TestAuthorizationServer_VerifyExpired(t *testing.T) {
 	server := NewAuthorizationServer(secret, rpc.NewUserServiceMock(nil, false))
 	ctx := context.TODO()
-	token, err := server.jwt.SignIn(1*time.Second, "username", nil, []string{"User"}, nil)
+	token, err := server.accessToken.SignIn(1*time.Second, "username", nil, []string{"User"}, nil)
 	time.Sleep(2 * time.Second)
 	_, err = server.VerifyAccessToken(ctx, &rpc2.VerifyAccessTokenParams{AccessToken: token})
 	if err == nil {
@@ -90,7 +94,7 @@ func TestAuthorizationServer_VerifyCantAccessUserService(t *testing.T) {
 func TestAuthorizationServer_SignInCantAccessUserService(t *testing.T) {
 	server := NewAuthorizationServer(secret, rpc.NewUserServiceMock([]error{fmt.Errorf("asd")}, false))
 	ctx := context.TODO()
-	token,_ := server.jwt.SignIn(2*time.Second, "username", nil, []string{"User"}, nil)
+	token,_ := server.accessToken.SignIn(2*time.Second, "username", nil, []string{"User"}, nil)
 	_, err := server.VerifyAccessToken(ctx, &rpc2.VerifyAccessTokenParams{AccessToken:token})
 	if err != nil {
 		t.Error(err)
@@ -98,3 +102,24 @@ func TestAuthorizationServer_SignInCantAccessUserService(t *testing.T) {
 	}
 }
 
+func TestAuthorizationServer_RefreshAccessToken(t *testing.T) {
+	server := NewAuthorizationServer(secret, rpc.NewUserServiceMock(nil, false))
+	ctx := context.TODO()
+	resp0,_ := server.SignIn(ctx, &rpc2.SignInParams{
+		Username: "u",
+		Password: "p",
+	})
+	resp1, err := server.RefreshAccessToken(ctx, &rpc2.RefreshAccessTokenParams{
+		RefreshToken: resp0.RefreshToken,
+	})
+	if err != nil {
+		t.Error(err)
+		t.FailNow()
+	}
+	if validator.IsEmpty(resp1.AccessToken) {
+		t.FailNow()
+	}
+	if !validator.IsEmpty(resp1.RefreshToken) {
+		t.FailNow()
+	}
+}

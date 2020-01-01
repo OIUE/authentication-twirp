@@ -4,6 +4,7 @@
     <list default="true" id="a1e4a88c-dc40-49e6-b550-c4f666b3c047" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/app/app1/server/authorization_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/app/app1/server/authorization_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/app/app1/server/authorization_service_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/app/app1/server/authorization_service_test.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +85,7 @@
       <recent name="$PROJECT_DIR$/build/package/app1/wait-for-it" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Build.go build main.go">
+  <component name="RunManager" selected="Go Test.TestAuthorizationServer_RefreshAccessToken in github.com/pepeunlimited/authorization-twirp/internal/app/app1/server">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="go-starter-kit" />
       <working_directory value="$PROJECT_DIR$/" />
@@ -104,7 +105,7 @@
       <directory value="$PROJECT_DIR$/" />
       <method v="2" />
     </configuration>
-    <configuration name="TestAuthorizationServer_SignInCantAccessUserService in github.com/pepeunlimited/authorization-twirp/internal/app/app1/server" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="TestAuthorizationServer_RefreshAccessToken in github.com/pepeunlimited/authorization-twirp/internal/app/app1/server" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="go-starter-kit" />
       <working_directory value="$PROJECT_DIR$/internal/app/app1/server" />
       <framework value="gotest" />
@@ -112,10 +113,10 @@
       <package value="github.com/pepeunlimited/authorization-twirp/internal/app/app1/server" />
       <directory value="$PROJECT_DIR$/" />
       <filePath value="$PROJECT_DIR$/" />
-      <pattern value="^TestAuthorizationServer_SignInCantAccessUserService$" />
+      <pattern value="^TestAuthorizationServer_RefreshAccessToken$" />
       <method v="2" />
     </configuration>
-    <configuration name="TestAuthorizationServer_VerifyExpired in github.com/pepeunlimited/authorization-twirp/internal/app/app1/server" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="TestAuthorizationServer_SignIn in github.com/pepeunlimited/authorization-twirp/internal/app/app1/server" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="go-starter-kit" />
       <working_directory value="$PROJECT_DIR$/internal/app/app1/server" />
       <framework value="gotest" />
@@ -123,7 +124,7 @@
       <package value="github.com/pepeunlimited/authorization-twirp/internal/app/app1/server" />
       <directory value="$PROJECT_DIR$/" />
       <filePath value="$PROJECT_DIR$/" />
-      <pattern value="^TestAuthorizationServer_VerifyExpired$" />
+      <pattern value="^TestAuthorizationServer_SignIn$" />
       <method v="2" />
     </configuration>
     <configuration name="TestAuthorizationServer_VerifyMalformed in github.com/pepeunlimited/authorization-twirp/internal/app/app1/server" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
@@ -160,11 +161,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Test.TestAuthorizationServer_RefreshAccessToken in github.com/pepeunlimited/authorization-twirp/internal/app/app1/server" />
+        <item itemvalue="Go Test.TestAuthorizationServer_SignIn in github.com/pepeunlimited/authorization-twirp/internal/app/app1/server" />
         <item itemvalue="Go Build.go build main.go" />
         <item itemvalue="Go Test.TestAuthorizationServer_VerifyMalformed in github.com/pepeunlimited/authorization-twirp/internal/app/app1/server" />
         <item itemvalue="Go Test.authorization_service_test.go" />
-        <item itemvalue="Go Test.TestAuthorizationServer_SignInCantAccessUserService in github.com/pepeunlimited/authorization-twirp/internal/app/app1/server" />
-        <item itemvalue="Go Test.TestAuthorizationServer_VerifyExpired in github.com/pepeunlimited/authorization-twirp/internal/app/app1/server" />
       </list>
     </recent_temporary>
   </component>
@@ -241,22 +242,26 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="579" y="335" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1680.1050@0.0.1680.1050" timestamp="1577625227327" />
-    <state width="1638" height="487" key="GridCell.Tab.0.bottom" timestamp="1577872056955">
+    <state x="619" y="241" key="#com.intellij.ide.util.MemberChooser" timestamp="1577905248742">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="487" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1577872056955" />
-    <state width="1638" height="487" key="GridCell.Tab.0.center" timestamp="1577872056953">
+    <state x="619" y="241" key="#com.intellij.ide.util.MemberChooser/0.0.1680.1050@0.0.1680.1050" timestamp="1577905248742" />
+    <state width="1638" height="487" key="GridCell.Tab.0.bottom" timestamp="1577906270613">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="487" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1577872056953" />
-    <state width="1638" height="487" key="GridCell.Tab.0.left" timestamp="1577872056952">
+    <state width="1638" height="487" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1577906270613" />
+    <state width="1638" height="487" key="GridCell.Tab.0.center" timestamp="1577906270612">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="487" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1577872056952" />
-    <state width="1638" height="487" key="GridCell.Tab.0.right" timestamp="1577872056954">
+    <state width="1638" height="487" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1577906270612" />
+    <state width="1638" height="487" key="GridCell.Tab.0.left" timestamp="1577906270611">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="487" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1577872056954" />
+    <state width="1638" height="487" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1577906270611" />
+    <state width="1638" height="487" key="GridCell.Tab.0.right" timestamp="1577906270613">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state width="1638" height="487" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1577906270613" />
     <state width="1638" height="363" key="GridCell.Tab.1.bottom" timestamp="1577616678291">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
@@ -277,10 +282,10 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="349" y="164" key="SettingsEditor/0.0.1680.1050@0.0.1680.1050" timestamp="1576349228264" />
-    <state width="500" height="445" key="SwitcherDM" timestamp="1577623055333">
+    <state width="500" height="445" key="SwitcherDM" timestamp="1577904528590">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="500" height="445" key="SwitcherDM/0.0.1680.1050@0.0.1680.1050" timestamp="1577623055333" />
+    <state width="500" height="445" key="SwitcherDM/0.0.1680.1050@0.0.1680.1050" timestamp="1577904528590" />
     <state x="100" y="100" width="1480" height="850" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1576581191498">
       <screen x="0" y="23" width="1680" height="984" />
     </state>
