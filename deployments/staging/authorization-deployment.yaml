@@ -18,8 +18,10 @@ spec:
         - env:
             - name: RPC_USERS_HOST
               value: http://users.default.svc.cluster.local
-            - name: JWT_SECRET_KEY
+            - name: ACCESS_TOKEN_SECRET_KEY
               value: v3ry-s3cr3t-k3y-666
+            - name: REFRESH_TOKEN_SECRET_KEY
+              value: v3ry-s3cr3t-k3y-999
           image: pepeunlimited/authorization-twirp:0.1.2
           name: authorization-twirp
           ports:

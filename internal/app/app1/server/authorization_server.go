@@ -124,11 +124,11 @@ func (server AuthorizationServer) SignIn(ctx context.Context, params *rpc.SignIn
 	}, nil
 }
 
-func NewAuthorizationServer(secret string, userService rpc2.UserService) AuthorizationServer {
+func NewAuthorizationServer(accessTokenSecret string, refreshTokenSecret string, userService rpc2.UserService) AuthorizationServer {
 	return AuthorizationServer{
 		userService: 	userService,
 		validator: 		validator.NewAuthorizationServerValidator(),
-		accessToken: 	jwt.NewJWT([]byte(secret)),
-		refreshToken: 	jwt.NewJWT([]byte(secret)),
+		accessToken: 	jwt.NewJWT([]byte(accessTokenSecret)),
+		refreshToken: 	jwt.NewJWT([]byte(refreshTokenSecret)),
 	}
 }

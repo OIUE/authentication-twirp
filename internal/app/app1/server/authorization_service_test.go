@@ -12,10 +12,11 @@ import (
 	"time"
 )
 
-var secret string = "s3cr3t"
+var secret1 string = "s3cr3t-1"
+var secret2 string = "s3cr3t-2"
 
 func TestAuthorizationServer_SignIn(t *testing.T) {
-	server := NewAuthorizationServer(secret, rpc.NewUserServiceMock(nil, false))
+	server := NewAuthorizationServer(secret1, secret2, rpc.NewUserServiceMock(nil, false))
 	ctx := context.TODO()
 	resp0, err := server.SignIn(ctx, &rpc2.SignInParams{
 		Username: "kakkaliisa",
@@ -37,7 +38,7 @@ func TestAuthorizationServer_SignIn(t *testing.T) {
 }
 
 func TestAuthorizationServer_SignInError(t *testing.T) {
-	server := NewAuthorizationServer(secret, rpc.NewUserServiceMock([]error{fmt.Errorf("custom-error")}, false))
+	server := NewAuthorizationServer(secret1, secret2, rpc.NewUserServiceMock([]error{fmt.Errorf("custom-error")}, false))
 	ctx := context.TODO()
 	_, err := server.SignIn(ctx, &rpc2.SignInParams{
 		Username: "kakkaliisa",
@@ -49,7 +50,7 @@ func TestAuthorizationServer_SignInError(t *testing.T) {
 }
 
 func TestAuthorizationServer_VerifyExpired(t *testing.T) {
-	server := NewAuthorizationServer(secret, rpc.NewUserServiceMock(nil, false))
+	server := NewAuthorizationServer(secret1, secret2, rpc.NewUserServiceMock(nil, false))
 	ctx := context.TODO()
 	token, err := server.accessToken.SignIn(1*time.Second, "username", nil, []string{"User"}, nil)
 	time.Sleep(2 * time.Second)
@@ -63,7 +64,7 @@ func TestAuthorizationServer_VerifyExpired(t *testing.T) {
 }
 
 func TestAuthorizationServer_VerifyMalformed(t *testing.T) {
-	server := NewAuthorizationServer(secret, rpc.NewUserServiceMock(nil, false))
+	server := NewAuthorizationServer(secret1, secret2, rpc.NewUserServiceMock(nil, false))
 	ctx := context.TODO()
 	token := "eyJhbGciOiJIUzI1NIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNpaW1vbyIsImtYWlsIjoic2ltb29AZ21haWwuY29tIiwicm9sZXMiOlsidXNlciJdLCJ1c2VyX2lkIjozLCJleHAiOjE1Nzc2MTczOTR9.AC7mkWENKOwHdZWkbD0QaBR1mMhxR1mo8PKztwQ47qA"
 	_, err := server.VerifyAccessToken(ctx, &rpc2.VerifyAccessTokenParams{AccessToken: token})
@@ -77,7 +78,7 @@ func TestAuthorizationServer_VerifyMalformed(t *testing.T) {
 }
 
 func TestAuthorizationServer_VerifyCantAccessUserService(t *testing.T) {
-	server := NewAuthorizationServer(secret, rpc.NewUserServiceMock([]error{fmt.Errorf("asd")}, false))
+	server := NewAuthorizationServer(secret1, secret2, rpc.NewUserServiceMock([]error{fmt.Errorf("asd")}, false))
 	ctx := context.TODO()
 	_, err := server.SignIn(ctx, &rpc2.SignInParams{
 		Username: "a",
@@ -92,7 +93,7 @@ func TestAuthorizationServer_VerifyCantAccessUserService(t *testing.T) {
 }
 
 func TestAuthorizationServer_SignInCantAccessUserService(t *testing.T) {
-	server := NewAuthorizationServer(secret, rpc.NewUserServiceMock([]error{fmt.Errorf("asd")}, false))
+	server := NewAuthorizationServer(secret1, secret2, rpc.NewUserServiceMock([]error{fmt.Errorf("asd")}, false))
 	ctx := context.TODO()
 	token,_ := server.accessToken.SignIn(2*time.Second, "username", nil, []string{"User"}, nil)
 	_, err := server.VerifyAccessToken(ctx, &rpc2.VerifyAccessTokenParams{AccessToken:token})
@@ -103,7 +104,7 @@ func TestAuthorizationServer_SignInCantAccessUserService(t *testing.T) {
 }
 
 func TestAuthorizationServer_RefreshAccessToken(t *testing.T) {
-	server := NewAuthorizationServer(secret, rpc.NewUserServiceMock(nil, false))
+	server := NewAuthorizationServer(secret1, secret2, rpc.NewUserServiceMock(nil, false))
 	ctx := context.TODO()
 	resp0,_ := server.SignIn(ctx, &rpc2.SignInParams{
 		Username: "u",

@@ -19,11 +19,15 @@ const (
 func main() {
 	log.Printf("Starting the authorization-twirp... version=[%v]", Version)
 
-	secret := misc.GetEnv(jwt.SECRET_KEY, "v3ry-s3cr3t-k3y")
+	accessTokenSecret := misc.GetEnv(jwt.AccessTokenSecretKey, "v3ry-s3cr3t-k3y-666")
+	refreshTokenSecret := misc.GetEnv(jwt.RefreshTokenSecretKey, "v3ry-s3cr3t-k3y-999")
 	usersAddress := misc.GetEnv(rpc2.RpcUsersHost, "http://localhost:8080")
 
-	as := rpc.NewAuthorizationServiceServer(server.NewAuthorizationServer(secret,
-		rpc2.NewUserServiceProtobufClient(usersAddress,http.DefaultClient)), nil)
+	as := rpc.NewAuthorizationServiceServer(
+		server.NewAuthorizationServer(accessTokenSecret,
+		refreshTokenSecret,
+		rpc2.NewUserServiceProtobufClient(usersAddress,http.DefaultClient)),
+		nil)
 	mux := http.NewServeMux()
 	mux.Handle(as.PathPrefix(), middleware.Adapt(as, headers.Authorizationz()))
 
