@@ -18,6 +18,38 @@ type AuthorizationServer struct {
 	jwt 		jwt.JWT
 }
 
+func (server AuthorizationServer) RefreshAccessToken(ctx context.Context, params *rpc.RefreshAccessTokenParams) (*rpc.RefreshAccessTokenResponse, error) {
+	return nil, nil
+}
+
+func (server AuthorizationServer) VerifyAccessToken(ctx context.Context, params *rpc.VerifyAccessTokenParams) (*rpc.VerifyAccessTokenResponse, error) {
+	err := server.validator.Verify(params)
+	if err != nil {
+		return nil, err
+	}
+	claims, err := server.jwt.VerifyCustomClaims(params.AccessToken)
+	if err != nil {
+		switch err {
+		case jwt.ErrExpired:
+			return nil, twirp.NewError(twirp.Unauthenticated, err.Error()).WithMeta(rpcz.Reason, rpc.JwtExpired)
+		case jwt.ErrMalformed:
+			return nil, twirp.NewError(twirp.Malformed, err.Error()).WithMeta(rpcz.Reason, rpc.JwtMalformed)
+		}
+		return nil, twirp.NewError(twirp.Internal, err.Error()).WithMeta(rpcz.Reason, rpc.JwtUnknownError)
+	}
+	resp := &rpc.VerifyAccessTokenResponse{
+		Username: claims.Username,
+		Roles:    claims.Roles,
+	}
+	if claims.Email != nil {
+		resp.Email = *claims.Email
+	}
+	if claims.UserId != nil {
+		resp.UserId = *claims.UserId
+	}
+	return resp, nil
+}
+
 func (server AuthorizationServer) SignIn(ctx context.Context, params *rpc.SignInParams) (*rpc.SignInResponse, error) {
 	log.Printf("sign-in: %s", params)
 	err := server.validator.SignIn(params)
@@ -32,47 +64,14 @@ func (server AuthorizationServer) SignIn(ctx context.Context, params *rpc.SignIn
 	if err != nil {
 		return nil, err
 	}
-	token, err := server.jwt.SignIn(30*time.Minute, user.Username, &user.Email, user.Roles, &user.Id)
+	accessToken, err := server.jwt.SignIn(30*time.Minute, user.Username, &user.Email, user.Roles, &user.Id)
 	if err != nil {
 		return nil, err
 	}
 	return &rpc.SignInResponse{
-		Token:                token,
+		AccessToken:          accessToken,
 		RefreshToken:         "",
 	}, nil
-}
-
-func (server AuthorizationServer) Refresh(ctx context.Context, params *rpc.RefreshParams) (*rpc.RefreshResponse, error) {
-	return nil, nil
-}
-
-func (server AuthorizationServer) Verify(ctx context.Context, params *rpc.VerifyParams) (*rpc.VerifyResponse, error) {
-	log.Printf("verify: %s", params)
-	err := server.validator.Verify(params)
-	if err != nil {
-		return nil, err
-	}
-	claims, err := server.jwt.VerifyCustomClaims(params.Token)
-	if err != nil {
-		switch err {
-		case jwt.ErrExpired:
-			return nil, twirp.NewError(twirp.Unauthenticated, err.Error()).WithMeta(rpcz.Reason, rpc.JwtExpired)
-		case jwt.ErrMalformed:
-			return nil, twirp.NewError(twirp.Malformed, err.Error()).WithMeta(rpcz.Reason, rpc.JwtMalformed)
-		}
-		return nil, twirp.NewError(twirp.Internal, err.Error()).WithMeta(rpcz.Reason, rpc.JwtUnknownError)
-	}
-	resp := &rpc.VerifyResponse{
-		Username: claims.Username,
-		Roles:    claims.Roles,
-	}
-	if claims.Email != nil {
-		resp.Email = *claims.Email
-	}
-	if claims.UserId != nil {
-		resp.UserId = *claims.UserId
-	}
-	return resp, nil
 }
 
 func NewAuthorizationServer(secret string, userService rpc2.UserService) AuthorizationServer {

@@ -31,8 +31,8 @@ func (AuthorizationServerValidator) Refresh(params *rpc.RefreshParams) error {
 }
 
 func (AuthorizationServerValidator) Verify(params *rpc.VerifyParams) error {
-	if validator.IsEmpty(params.Token) {
-		return twirp.RequiredArgumentError("token")
+	if validator.IsEmpty(params.AccessToken) {
+		return twirp.RequiredArgumentError("access_token")
 	}
 	return nil
 }

@@ -9,7 +9,7 @@ $ curl -H "Content-Type: application/json" \
  -X POST "http://api.dev.pepeunlimited.com/twirp/pepeunlimited.authorization.AuthorizationService/SignIn" \
  -d '{"username": "kakkaliisa", "password": "p4sw0rd"}'
 ```
-##### SignIn
+##### VerifySignIn
 ```
 $ curl -H "Content-Type: application/json" -H "Authorization: Bearer REPLACE_WITH_TOKEN" \
  -X POST "localhost:8080/twirp/pepeunlimited.authorization.AuthorizationService/SignIn" \
