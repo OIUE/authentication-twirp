@@ -17,13 +17,13 @@ func (m *Mock) SignIn(ctx context.Context, params *SignInParams) (*SignInRespons
 	return nil, nil
 }
 
-func (m *Mock) Refresh(ctx context.Context, parmas *RefreshParams) (*RefreshResponse, error) {
+func (m *Mock) RefreshAccessToken(ctx context.Context, parmas *RefreshAccessTokenParams) (*RefreshAccessTokenResponse, error) {
 	return nil, nil
 }
 
-func (m *Mock) Verify(ctx context.Context, params *VerifyParams) (*VerifyResponse, error) {
+func (m *Mock) VerifyAccessToken(ctx context.Context, params *VerifyAccessTokenParams) (*VerifyAccessTokenResponse, error) {
 	if m.Errors.IsEmpty() {
-		return &VerifyResponse{
+		return &VerifyAccessTokenResponse{
 			Username:             m.Username,
 			Email:                m.Email,
 			UserId:               m.UserId,
