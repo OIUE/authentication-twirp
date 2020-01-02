@@ -42,7 +42,7 @@ func (server AuthorizationServer) RefreshAccessToken(ctx context.Context, params
 	resp := &rpc.RefreshAccessTokenResponse{AccessToken:  accessToken}
 	// new refresh_token if the refresh token expires in 7d's
 	if server.isRefreshToken(time.Unix(claims.ExpiresAt, 0), newRefreshToken) {
-		refreshToken, err := server.refreshToken.SignIn(accessTokenExp, claims.Username, claims.Email, claims.Roles, claims.UserId)
+		refreshToken, err := server.refreshToken.SignIn(refreshTokenExp, claims.Username, claims.Email, claims.Roles, claims.UserId)
 		if err != nil {
 			log.Print("authorization-twirp: unknown error during accessToken: "+err.Error())
 			return nil, twirp.InternalErrorWith(err)
