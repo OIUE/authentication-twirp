@@ -6,7 +6,7 @@ import (
 	"github.com/pepeunlimited/authorization-twirp/rpcauthorization"
 	"github.com/pepeunlimited/microservice-kit/jwt"
 	"github.com/pepeunlimited/microservice-kit/rpcz"
-	rpc2 "github.com/pepeunlimited/users/rpc"
+	"github.com/pepeunlimited/users/rpccredentials"
 	"github.com/twitchtv/twirp"
 	"log"
 	"time"
@@ -14,7 +14,7 @@ import (
 
 type AuthorizationServer struct {
 	validator 		validator.AuthorizationServerValidator
-	userService 	rpc2.UserService
+	credentials 	rpccredentials.CredentialsService
 	accessToken 	jwt.JWT
 	refreshToken 	jwt.JWT
 }
@@ -106,7 +106,7 @@ func (server AuthorizationServer) SignIn(ctx context.Context, params *rpcauthori
 		return nil, err
 	}
 	// verify does the user exist and etc from users-service
-	user, err := server.userService.VerifySignIn(ctx, &rpc2.VerifySignInParams{
+	user, err := server.credentials.VerifySignIn(ctx, &rpccredentials.VerifySignInParams{
 		Username: params.Username,
 		Password: params.Password,
 	})
@@ -130,9 +130,9 @@ func (server AuthorizationServer) SignIn(ctx context.Context, params *rpcauthori
 	}, nil
 }
 
-func NewAuthorizationServer(accessTokenSecret string, refreshTokenSecret string, userService rpc2.UserService) AuthorizationServer {
+func NewAuthorizationServer(accessTokenSecret string, refreshTokenSecret string, credentials rpccredentials.CredentialsService) AuthorizationServer {
 	return AuthorizationServer{
-		userService: 	userService,
+		credentials:	credentials,
 		validator: 		validator.NewAuthorizationServerValidator(),
 		accessToken: 	jwt.NewJWT([]byte(accessTokenSecret)),
 		refreshToken: 	jwt.NewJWT([]byte(refreshTokenSecret)),

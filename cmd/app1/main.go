@@ -7,13 +7,13 @@ import (
 	"github.com/pepeunlimited/microservice-kit/jwt"
 	"github.com/pepeunlimited/microservice-kit/middleware"
 	"github.com/pepeunlimited/microservice-kit/misc"
-	rpc2 "github.com/pepeunlimited/users/rpc"
+	"github.com/pepeunlimited/users/rpccredentials"
 	"log"
 	"net/http"
 )
 
 const (
-	Version = "0.1.2.3"
+	Version = "0.1.2.4"
 )
 
 func main() {
@@ -21,12 +21,12 @@ func main() {
 
 	accessTokenSecret := misc.GetEnv(jwt.AccessTokenSecretKey, "v3ry-s3cr3t-k3y-666")
 	refreshTokenSecret := misc.GetEnv(jwt.RefreshTokenSecretKey, "v3ry-s3cr3t-k3y-999")
-	usersAddress := misc.GetEnv(rpc2.RpcUsersHost, "http://localhost:8080")
+	credentialsAddress := misc.GetEnv(rpccredentials.RpcCredentialsHost, "http://localhost:8080")
 
 	as := rpcauthorization.NewAuthorizationServiceServer(
 		server.NewAuthorizationServer(accessTokenSecret,
 		refreshTokenSecret,
-		rpc2.NewUserServiceProtobufClient(usersAddress,http.DefaultClient)),
+		rpccredentials.NewCredentialsServiceProtobufClient(credentialsAddress,http.DefaultClient)),
 		nil)
 	mux := http.NewServeMux()
 	mux.Handle(as.PathPrefix(), middleware.Adapt(as, headers.Authorizationz()))

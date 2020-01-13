@@ -16,13 +16,13 @@ spec:
     spec:
       containers:
         - env:
-            - name: RPC_USERS_HOST
+            - name: RPC_CREDENTIALS_HOST
               value: http://users.default.svc.cluster.local
             - name: ACCESS_TOKEN_SECRET_KEY
               value: v3ry-s3cr3t-k3y-666
             - name: REFRESH_TOKEN_SECRET_KEY
               value: v3ry-s3cr3t-k3y-999
-          image: pepeunlimited/authorization-twirp:0.1.2.3
+          image: pepeunlimited/authorization-twirp:0.1.2.4
           name: authorization-twirp
           ports:
             - containerPort: 8080
