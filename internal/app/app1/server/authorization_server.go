@@ -3,7 +3,7 @@ package server
 import (
 	"context"
 	"github.com/pepeunlimited/authorization-twirp/internal/app/app1/validator"
-	"github.com/pepeunlimited/authorization-twirp/rpc"
+	"github.com/pepeunlimited/authorization-twirp/rpcauthorization"
 	"github.com/pepeunlimited/microservice-kit/jwt"
 	"github.com/pepeunlimited/microservice-kit/rpcz"
 	rpc2 "github.com/pepeunlimited/users/rpc"
@@ -21,11 +21,11 @@ type AuthorizationServer struct {
 
 const (
 	accessTokenExp 		time.Duration = 10*time.Minute
-	refreshTokenExp 	time.Duration = (24*time.Hour) * 2 // 31
-	newRefreshToken     time.Duration = (24*time.Hour) * 1 // 7
+	refreshTokenExp 	time.Duration = (24*time.Hour) * 31 // 31
+	newRefreshToken     time.Duration = (24*time.Hour) * 7 // 27
 )
 
-func (server AuthorizationServer) RefreshAccessToken(ctx context.Context, params *rpc.RefreshAccessTokenParams) (*rpc.RefreshAccessTokenResponse, error) {
+func (server AuthorizationServer) RefreshAccessToken(ctx context.Context, params *rpcauthorization.RefreshAccessTokenParams) (*rpcauthorization.RefreshAccessTokenResponse, error) {
 	if err := server.validator.RefreshAccessToken(params); err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ func (server AuthorizationServer) RefreshAccessToken(ctx context.Context, params
 		log.Print("authorization-twirp: unknown error during accessToken: "+err.Error())
 		return nil, twirp.InternalErrorWith(err)
 	}
-	resp := &rpc.RefreshAccessTokenResponse{AccessToken:  accessToken}
+	resp := &rpcauthorization.RefreshAccessTokenResponse{AccessToken: accessToken}
 	// new refresh_token if the refresh token expires in 7d's
 	if server.isRefreshToken(time.Unix(claims.ExpiresAt, 0), newRefreshToken) {
 		refreshToken, err := server.refreshToken.SignIn(refreshTokenExp, claims.Username, claims.Email, claims.Roles, claims.UserId)
@@ -59,7 +59,7 @@ func (server AuthorizationServer) isRefreshToken(expiresAt time.Time, before tim
 	return time.Now().UTC().After(newRefreshTokenAt)
 }
 
-func (server AuthorizationServer) VerifyAccessToken(ctx context.Context, params *rpc.VerifyAccessTokenParams) (*rpc.VerifyAccessTokenResponse, error) {
+func (server AuthorizationServer) VerifyAccessToken(ctx context.Context, params *rpcauthorization.VerifyAccessTokenParams) (*rpcauthorization.VerifyAccessTokenResponse, error) {
 	err := server.validator.VerifyAccessToken(params)
 	if err != nil {
 		return nil, err
@@ -68,7 +68,7 @@ func (server AuthorizationServer) VerifyAccessToken(ctx context.Context, params 
 	if err != nil {
 		return nil, server.isAccessTokenError(err)
 	}
-	resp := &rpc.VerifyAccessTokenResponse{
+	resp := &rpcauthorization.VerifyAccessTokenResponse{
 		Username: claims.Username,
 		Roles:    claims.Roles,
 	}
@@ -83,11 +83,11 @@ func (server AuthorizationServer) VerifyAccessToken(ctx context.Context, params 
 
 
 func (server AuthorizationServer) isRefreshTokenError(error error) error {
-	return server.isJwtError(error, rpc.RefreshTokenExpired, rpc.RefreshTokenMalformed, rpc.RefreshTokenUnknownError)
+	return server.isJwtError(error, rpcauthorization.RefreshTokenExpired, rpcauthorization.RefreshTokenMalformed, rpcauthorization.RefreshTokenUnknownError)
 }
 
 func (server AuthorizationServer) isAccessTokenError(error error) error {
-	return server.isJwtError(error, rpc.AccessTokenExpired, rpc.AccessTokenMalformed, rpc.AccessTokenUnknownError)
+	return server.isJwtError(error, rpcauthorization.AccessTokenExpired, rpcauthorization.AccessTokenMalformed, rpcauthorization.AccessTokenUnknownError)
 }
 
 func (server AuthorizationServer) isJwtError(error error, expired string, malformed string, unknown string) error {
@@ -100,7 +100,7 @@ func (server AuthorizationServer) isJwtError(error error, expired string, malfor
 	return twirp.NewError(twirp.Internal, error.Error()).WithMeta(rpcz.Reason, unknown)
 }
 
-func (server AuthorizationServer) SignIn(ctx context.Context, params *rpc.SignInParams) (*rpc.SignInResponse, error) {
+func (server AuthorizationServer) SignIn(ctx context.Context, params *rpcauthorization.SignInParams) (*rpcauthorization.SignInResponse, error) {
 	err := server.validator.SignIn(params)
 	if err != nil {
 		return nil, err
@@ -124,7 +124,7 @@ func (server AuthorizationServer) SignIn(ctx context.Context, params *rpc.SignIn
 		log.Print("authorization-twirp: unknown error during refreshToken: "+err.Error())
 		return nil, twirp.InternalErrorWith(err)
 	}
-	return &rpc.SignInResponse{
+	return &rpcauthorization.SignInResponse{
 		AccessToken:          accessToken,
 		RefreshToken:         refreshToken,
 	}, nil

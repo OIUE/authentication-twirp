@@ -3,7 +3,7 @@ package server
 import (
 	"context"
 	"fmt"
-	rpc2 "github.com/pepeunlimited/authorization-twirp/rpc"
+	rpc2 "github.com/pepeunlimited/authorization-twirp/rpcauthorization"
 	"github.com/pepeunlimited/microservice-kit/validator"
 	"github.com/pepeunlimited/users/rpc"
 	"github.com/twitchtv/twirp"

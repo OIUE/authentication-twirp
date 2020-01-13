@@ -1,4 +1,4 @@
-package rpc
+package rpcauthorization
 
 import (
 	"context"

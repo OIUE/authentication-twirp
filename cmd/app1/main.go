@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/pepeunlimited/authorization-twirp/internal/app/app1/server"
-	"github.com/pepeunlimited/authorization-twirp/rpc"
+	"github.com/pepeunlimited/authorization-twirp/rpcauthorization"
 	"github.com/pepeunlimited/microservice-kit/headers"
 	"github.com/pepeunlimited/microservice-kit/jwt"
 	"github.com/pepeunlimited/microservice-kit/middleware"
@@ -23,7 +23,7 @@ func main() {
 	refreshTokenSecret := misc.GetEnv(jwt.RefreshTokenSecretKey, "v3ry-s3cr3t-k3y-999")
 	usersAddress := misc.GetEnv(rpc2.RpcUsersHost, "http://localhost:8080")
 
-	as := rpc.NewAuthorizationServiceServer(
+	as := rpcauthorization.NewAuthorizationServiceServer(
 		server.NewAuthorizationServer(accessTokenSecret,
 		refreshTokenSecret,
 		rpc2.NewUserServiceProtobufClient(usersAddress,http.DefaultClient)),

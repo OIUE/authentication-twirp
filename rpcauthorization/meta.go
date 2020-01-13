@@ -1,4 +1,4 @@
-package rpc
+package rpcauthorization
 
 import (
 	"github.com/pepeunlimited/microservice-kit/rpcz"
