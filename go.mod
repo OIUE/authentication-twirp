@@ -1,4 +1,4 @@
-module github.com/pepeunlimited/authorization-twirp
+module github.com/pepeunlimited/authentication-twirp
 
 go 1.13
 

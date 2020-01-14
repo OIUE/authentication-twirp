@@ -5,7 +5,7 @@ import (
 	"github.com/pepeunlimited/microservice-kit/errorz"
 )
 
-type Mock struct {
+type AuthenticationMock struct {
 	Errors 		errorz.Stack
 	Username    string
 	Email       string
@@ -13,15 +13,15 @@ type Mock struct {
 	Roles       []string
 }
 
-func (m *Mock) SignIn(ctx context.Context, params *SignInParams) (*SignInResponse, error) {
+func (m *AuthenticationMock) SignIn(ctx context.Context, params *SignInParams) (*SignInResponse, error) {
 	return nil, nil
 }
 
-func (m *Mock) RefreshAccessToken(ctx context.Context, parmas *RefreshAccessTokenParams) (*RefreshAccessTokenResponse, error) {
+func (m *AuthenticationMock) RefreshAccessToken(ctx context.Context, parmas *RefreshAccessTokenParams) (*RefreshAccessTokenResponse, error) {
 	return nil, nil
 }
 
-func (m *Mock) VerifyAccessToken(ctx context.Context, params *VerifyAccessTokenParams) (*VerifyAccessTokenResponse, error) {
+func (m *AuthenticationMock) VerifyAccessToken(ctx context.Context, params *VerifyAccessTokenParams) (*VerifyAccessTokenResponse, error) {
 	if m.Errors.IsEmpty() {
 		return &VerifyAccessTokenResponse{
 			Username:             m.Username,
@@ -35,7 +35,7 @@ func (m *Mock) VerifyAccessToken(ctx context.Context, params *VerifyAccessTokenP
 }
 
 func NewAuthenticationMock(errors []error) AuthenticationService {
-	return &Mock{
+	return &AuthenticationMock{
 		Errors:   errorz.NewErrorStack(errors),
 		Username: "kakkaliisa",
 		Email:    "kakkaliisa@gmail.com",

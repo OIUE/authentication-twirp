@@ -2,8 +2,8 @@ package server
 
 import (
 	"context"
-	"github.com/pepeunlimited/authorization-twirp/internal/app/app1/validator"
-	"github.com/pepeunlimited/authorization-twirp/rpcauth"
+	"github.com/pepeunlimited/authentication-twirp/internal/app/app1/validator"
+	"github.com/pepeunlimited/authentication-twirp/rpcauth"
 	"github.com/pepeunlimited/microservice-kit/jwt"
 	"github.com/pepeunlimited/microservice-kit/rpcz"
 	"github.com/pepeunlimited/users/rpccredentials"

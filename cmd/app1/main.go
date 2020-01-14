@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/pepeunlimited/authorization-twirp/internal/app/app1/server"
-	"github.com/pepeunlimited/authorization-twirp/rpcauth"
+	"github.com/pepeunlimited/authentication-twirp/internal/app/app1/server"
+	"github.com/pepeunlimited/authentication-twirp/rpcauth"
 	"github.com/pepeunlimited/microservice-kit/headers"
 	"github.com/pepeunlimited/microservice-kit/jwt"
 	"github.com/pepeunlimited/microservice-kit/middleware"
