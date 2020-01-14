@@ -1,4 +1,4 @@
-package rpcauthorization
+package rpcauth
 
 import (
 	"context"
@@ -34,7 +34,7 @@ func (m *Mock) VerifyAccessToken(ctx context.Context, params *VerifyAccessTokenP
 	return nil, m.Errors.Pop()
 }
 
-func NewAuthorizationMock(errors []error) AuthorizationService {
+func NewAuthenticationMock(errors []error) AuthenticationService {
 	return &Mock{
 		Errors:   errorz.NewErrorStack(errors),
 		Username: "kakkaliisa",

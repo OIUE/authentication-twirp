@@ -1,19 +1,18 @@
 package validator
 
 import (
-	"github.com/pepeunlimited/authorization-twirp/rpcauthorization"
+	"github.com/pepeunlimited/authorization-twirp/rpcauth"
 	"github.com/pepeunlimited/microservice-kit/validator"
 	"github.com/twitchtv/twirp"
 )
 
-type AuthorizationServerValidator struct {}
+type AuthenticationServerValidator struct {}
 
-
-func NewAuthorizationServerValidator() AuthorizationServerValidator {
-	return AuthorizationServerValidator{}
+func NewAuthenticationServerValidator() AuthenticationServerValidator {
+	return AuthenticationServerValidator{}
 }
 
-func (AuthorizationServerValidator) SignIn(params *rpcauthorization.SignInParams) error {
+func (AuthenticationServerValidator) SignIn(params *rpcauth.SignInParams) error {
 	if validator.IsEmpty(params.Password) {
 		return twirp.RequiredArgumentError("password")
 	}
@@ -23,14 +22,14 @@ func (AuthorizationServerValidator) SignIn(params *rpcauthorization.SignInParams
 	return nil
 }
 
-func (AuthorizationServerValidator) RefreshAccessToken(params *rpcauthorization.RefreshAccessTokenParams) error {
+func (AuthenticationServerValidator) RefreshAccessToken(params *rpcauth.RefreshAccessTokenParams) error {
 	if validator.IsEmpty(params.RefreshToken) {
 		return twirp.RequiredArgumentError("refresh_token")
 	}
 	return nil
 }
 
-func (AuthorizationServerValidator) VerifyAccessToken(params *rpcauthorization.VerifyAccessTokenParams) error {
+func (AuthenticationServerValidator) VerifyAccessToken(params *rpcauth.VerifyAccessTokenParams) error {
 	if validator.IsEmpty(params.AccessToken) {
 		return twirp.RequiredArgumentError("access_token")
 	}

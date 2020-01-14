@@ -21,4 +21,4 @@ VERSION_SLUG="${VERSION#v}"
 echo "-- Updating tags to point to version $VERSION --"
 echo ""
 
-docker tag "pepeunlimited/authorization-twirp:${VERSION_SLUG}" "pepeunlimited/authorization-twirp:latest"
+docker tag "pepeunlimited/authentication-twirp:${VERSION_SLUG}" "pepeunlimited/authentication-twirp:latest"

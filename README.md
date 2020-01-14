@@ -1,6 +1,6 @@
-# rpc-stater-kit
+# authentication-twirp
 
-A starting point project to create `todo`-service
+A starting point project to create `authentication-twirp`-service
 
 ## Go Directories
 
@@ -26,7 +26,7 @@ Speed up implementing the database access using [`ent`](https://github.com/faceb
 ### `/rpc`
 
 #### [`twirp`](https://github.com/twitchtv/twirp)
--  `$ protoc --proto_path=$GOPATH/src:. --twirp_out=. --go_out=. authorization.proto`
+-  `$ protoc --proto_path=$GOPATH/src:. --twirp_out=. --go_out=. authentication.proto`
 
 
 ### `/scripts`

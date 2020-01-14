@@ -1,4 +1,4 @@
-package rpcauthorization
+package rpcauth
 
 import (
 	"context"
@@ -6,13 +6,13 @@ import (
 	"github.com/twitchtv/twirp"
 )
 
-func IsSignedIn(ctx context.Context, authorization AuthorizationService) (*VerifyAccessTokenResponse, error) {
+func IsSignedIn(ctx context.Context, authentication AuthenticationService) (*VerifyAccessTokenResponse, error) {
 	token, err := rpcz.GetAuthorizationWithoutPrefix(ctx)
 	if err != nil {
 		return nil, twirp.RequiredArgumentError("authorization")
 	}
 	// verify the token from the authorization service: blacklist and expired..
-	resp, err := authorization.VerifyAccessToken(ctx, &VerifyAccessTokenParams{AccessToken:token})
+	resp, err := authentication.VerifyAccessToken(ctx, &VerifyAccessTokenParams{AccessToken:token})
 	if err != nil {
 		return nil, err
 	}

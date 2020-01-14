@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/pepeunlimited/authorization-twirp/internal/app/app1/server"
-	"github.com/pepeunlimited/authorization-twirp/rpcauthorization"
+	"github.com/pepeunlimited/authorization-twirp/rpcauth"
 	"github.com/pepeunlimited/microservice-kit/headers"
 	"github.com/pepeunlimited/microservice-kit/jwt"
 	"github.com/pepeunlimited/microservice-kit/middleware"
@@ -13,18 +13,18 @@ import (
 )
 
 const (
-	Version = "0.1.2.4"
+	Version = "0.1.2.5"
 )
 
 func main() {
-	log.Printf("Starting the authorization-twirp... version=[%v]", Version)
+	log.Printf("Starting the authentication-twirp... version=[%v]", Version)
 
 	accessTokenSecret := misc.GetEnv(jwt.AccessTokenSecretKey, "v3ry-s3cr3t-k3y-666")
 	refreshTokenSecret := misc.GetEnv(jwt.RefreshTokenSecretKey, "v3ry-s3cr3t-k3y-999")
 	credentialsAddress := misc.GetEnv(rpccredentials.RpcCredentialsHost, "http://localhost:8080")
 
-	as := rpcauthorization.NewAuthorizationServiceServer(
-		server.NewAuthorizationServer(accessTokenSecret,
+	as := rpcauth.NewAuthenticationServiceServer(
+		server.NewAuthenticationServer(accessTokenSecret,
 		refreshTokenSecret,
 		rpccredentials.NewCredentialsServiceProtobufClient(credentialsAddress,http.DefaultClient)),
 		nil)
