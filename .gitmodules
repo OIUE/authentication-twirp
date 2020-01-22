@@ -1,0 +1,3 @@
+[submodule "authrpc/protobuf"]
+	path = authrpc/protobuf
+	url = git@github.com:pepeunlimited/protobuf.git
