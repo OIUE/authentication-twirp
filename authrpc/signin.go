@@ -1,4 +1,4 @@
-package rpcauth
+package authrpc
 
 import (
 	"context"

@@ -2,18 +2,18 @@ package main
 
 import (
 	"github.com/pepeunlimited/authentication-twirp/internal/app/app1/server"
-	"github.com/pepeunlimited/authentication-twirp/rpcauth"
+	"github.com/pepeunlimited/authentication-twirp/authrpc"
 	"github.com/pepeunlimited/microservice-kit/headers"
 	"github.com/pepeunlimited/microservice-kit/jwt"
 	"github.com/pepeunlimited/microservice-kit/middleware"
 	"github.com/pepeunlimited/microservice-kit/misc"
-	"github.com/pepeunlimited/users/rpccredentials"
+	"github.com/pepeunlimited/users/credentialsrpc"
 	"log"
 	"net/http"
 )
 
 const (
-	Version = "0.1.2.5"
+	Version = "0.1.2.6"
 )
 
 func main() {
@@ -21,12 +21,12 @@ func main() {
 
 	accessTokenSecret := misc.GetEnv(jwt.AccessTokenSecretKey, "v3ry-s3cr3t-k3y-666")
 	refreshTokenSecret := misc.GetEnv(jwt.RefreshTokenSecretKey, "v3ry-s3cr3t-k3y-999")
-	credentialsAddress := misc.GetEnv(rpccredentials.RpcCredentialsHost, "http://localhost:8080")
+	credentialsAddress := misc.GetEnv(credentialsrpc.RpcCredentialsHost, "http://localhost:8080")
 
-	as := rpcauth.NewAuthenticationServiceServer(
+	as := authrpc.NewAuthenticationServiceServer(
 		server.NewAuthenticationServer(accessTokenSecret,
 		refreshTokenSecret,
-		rpccredentials.NewCredentialsServiceProtobufClient(credentialsAddress,http.DefaultClient)),
+			credentialsrpc.NewCredentialsServiceProtobufClient(credentialsAddress,http.DefaultClient)),
 		nil)
 	mux := http.NewServeMux()
 	mux.Handle(as.PathPrefix(), middleware.Adapt(as, headers.Authorizationz()))

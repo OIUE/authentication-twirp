@@ -1,4 +1,4 @@
-package rpcauth
+package authrpc
 
 import (
 	"github.com/pepeunlimited/microservice-kit/rpcz"

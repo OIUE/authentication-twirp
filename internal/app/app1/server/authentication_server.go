@@ -3,10 +3,10 @@ package server
 import (
 	"context"
 	"github.com/pepeunlimited/authentication-twirp/internal/app/app1/validator"
-	"github.com/pepeunlimited/authentication-twirp/rpcauth"
+	"github.com/pepeunlimited/authentication-twirp/authrpc"
 	"github.com/pepeunlimited/microservice-kit/jwt"
 	"github.com/pepeunlimited/microservice-kit/rpcz"
-	"github.com/pepeunlimited/users/rpccredentials"
+	"github.com/pepeunlimited/users/credentialsrpc"
 	"github.com/twitchtv/twirp"
 	"log"
 	"time"
@@ -14,7 +14,7 @@ import (
 
 type AuthenticationServer struct {
 	validator 		validator.AuthenticationServerValidator
-	credentials 	rpccredentials.CredentialsService
+	credentials 	credentialsrpc.CredentialsService
 	accessToken 	jwt.JWT
 	refreshToken 	jwt.JWT
 }
@@ -25,7 +25,7 @@ const (
 	newRefreshToken     time.Duration = (24*time.Hour) * 7 // 27
 )
 
-func (server AuthenticationServer) RefreshAccessToken(ctx context.Context, params *rpcauth.RefreshAccessTokenParams) (*rpcauth.RefreshAccessTokenResponse, error) {
+func (server AuthenticationServer) RefreshAccessToken(ctx context.Context, params *authrpc.RefreshAccessTokenParams) (*authrpc.RefreshAccessTokenResponse, error) {
 	if err := server.validator.RefreshAccessToken(params); err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ func (server AuthenticationServer) RefreshAccessToken(ctx context.Context, param
 		log.Print("authentication-twirp: unknown error during accessToken: "+err.Error())
 		return nil, twirp.InternalErrorWith(err)
 	}
-	resp := &rpcauth.RefreshAccessTokenResponse{AccessToken: accessToken}
+	resp := &authrpc.RefreshAccessTokenResponse{AccessToken: accessToken}
 	// new refresh_token if the refresh token expires in 7d's
 	if server.isRefreshToken(time.Unix(claims.ExpiresAt, 0), newRefreshToken) {
 		refreshToken, err := server.refreshToken.SignIn(refreshTokenExp, claims.Username, claims.Email, claims.Roles, claims.UserId)
@@ -59,7 +59,7 @@ func (server AuthenticationServer) isRefreshToken(expiresAt time.Time, before ti
 	return time.Now().UTC().After(newRefreshTokenAt)
 }
 
-func (server AuthenticationServer) VerifyAccessToken(ctx context.Context, params *rpcauth.VerifyAccessTokenParams) (*rpcauth.VerifyAccessTokenResponse, error) {
+func (server AuthenticationServer) VerifyAccessToken(ctx context.Context, params *authrpc.VerifyAccessTokenParams) (*authrpc.VerifyAccessTokenResponse, error) {
 	err := server.validator.VerifyAccessToken(params)
 	if err != nil {
 		return nil, err
@@ -68,7 +68,7 @@ func (server AuthenticationServer) VerifyAccessToken(ctx context.Context, params
 	if err != nil {
 		return nil, server.isAccessTokenError(err)
 	}
-	resp := &rpcauth.VerifyAccessTokenResponse{
+	resp := &authrpc.VerifyAccessTokenResponse{
 		Username: claims.Username,
 		Roles:    claims.Roles,
 	}
@@ -83,11 +83,11 @@ func (server AuthenticationServer) VerifyAccessToken(ctx context.Context, params
 
 
 func (server AuthenticationServer) isRefreshTokenError(error error) error {
-	return server.isJwtError(error, rpcauth.RefreshTokenExpired, rpcauth.RefreshTokenMalformed, rpcauth.RefreshTokenUnknownError)
+	return server.isJwtError(error, authrpc.RefreshTokenExpired, authrpc.RefreshTokenMalformed, authrpc.RefreshTokenUnknownError)
 }
 
 func (server AuthenticationServer) isAccessTokenError(error error) error {
-	return server.isJwtError(error, rpcauth.AccessTokenExpired, rpcauth.AccessTokenMalformed, rpcauth.AccessTokenUnknownError)
+	return server.isJwtError(error, authrpc.AccessTokenExpired, authrpc.AccessTokenMalformed, authrpc.AccessTokenUnknownError)
 }
 
 func (server AuthenticationServer) isJwtError(error error, expired string, malformed string, unknown string) error {
@@ -100,13 +100,13 @@ func (server AuthenticationServer) isJwtError(error error, expired string, malfo
 	return twirp.NewError(twirp.Internal, error.Error()).WithMeta(rpcz.Reason, unknown)
 }
 
-func (server AuthenticationServer) SignIn(ctx context.Context, params *rpcauth.SignInParams) (*rpcauth.SignInResponse, error) {
+func (server AuthenticationServer) SignIn(ctx context.Context, params *authrpc.SignInParams) (*authrpc.SignInResponse, error) {
 	err := server.validator.SignIn(params)
 	if err != nil {
 		return nil, err
 	}
 	// verify does the user exist and etc from users-service
-	user, err := server.credentials.VerifySignIn(ctx, &rpccredentials.VerifySignInParams{
+	user, err := server.credentials.VerifySignIn(ctx, &credentialsrpc.VerifySignInParams{
 		Username: params.Username,
 		Password: params.Password,
 	})
@@ -124,7 +124,7 @@ func (server AuthenticationServer) SignIn(ctx context.Context, params *rpcauth.S
 		log.Print("authentication-twirp: unknown error during refreshToken: "+err.Error())
 		return nil, twirp.InternalErrorWith(err)
 	}
-	return &rpcauth.SignInResponse{
+	return &authrpc.SignInResponse{
 		AccessToken:          accessToken,
 		RefreshToken:         refreshToken,
 	}, nil
@@ -132,7 +132,7 @@ func (server AuthenticationServer) SignIn(ctx context.Context, params *rpcauth.S
 
 func NewAuthenticationServer(accessTokenSecret string,
 	refreshTokenSecret string,
-	credentials rpccredentials.CredentialsService) AuthenticationServer {
+	credentials credentialsrpc.CredentialsService) AuthenticationServer {
 	return AuthenticationServer{
 		credentials:	credentials,
 		validator: 		validator.NewAuthenticationServerValidator(),
