@@ -66,6 +66,8 @@ github.com/pepeunlimited/microservice-kit v0.0.0-20200101194341-7d7834523c0e h1:
 github.com/pepeunlimited/microservice-kit v0.0.0-20200101194341-7d7834523c0e/go.mod h1:ioKXg9wp47PIRCa8isEhMhCtMJT8PDv85G8x0pPadSg=
 github.com/pepeunlimited/microservice-kit v0.0.0-20200104135345-a4c82c1180ef h1:TSx5pbfZ3p62PyHxXG0hBPNrUrakqBn46epd59RjjCc=
 github.com/pepeunlimited/microservice-kit v0.0.0-20200104135345-a4c82c1180ef/go.mod h1:ioKXg9wp47PIRCa8isEhMhCtMJT8PDv85G8x0pPadSg=
+github.com/pepeunlimited/microservice-kit v0.0.0-20200126083236-98e28bb35221 h1:gEekcNdow53x5vz2Hy4Q6EQ0yCkwZ+xKwdKdql5nESU=
+github.com/pepeunlimited/microservice-kit v0.0.0-20200126083236-98e28bb35221/go.mod h1:ioKXg9wp47PIRCa8isEhMhCtMJT8PDv85G8x0pPadSg=
 github.com/pepeunlimited/users v0.0.0-20191227075039-a260f71cfd19 h1:oRvkuYuUROeCRl36GCoM0MUOi3b6M0qWThfvGPgTKtc=
 github.com/pepeunlimited/users v0.0.0-20191227075039-a260f71cfd19/go.mod h1:EaNHIayQAIsV+Dq+snQLuEu604n3O3X3lntg7hr4nN4=
 github.com/pepeunlimited/users v0.0.0-20191228172936-dbc235d12523 h1:w2PflnDYQRiO7eREPPZJd7WuyvnLLlaAikQmYq3Camw=
@@ -76,6 +78,8 @@ github.com/pepeunlimited/users v0.0.0-20200113172413-5fccb15e7674 h1:Ca3UdViWWL6
 github.com/pepeunlimited/users v0.0.0-20200113172413-5fccb15e7674/go.mod h1:DNckc6774K8UD/auEndBI4sp2WdSd0Z+Rx2al7Xi2Zc=
 github.com/pepeunlimited/users v0.0.0-20200122110337-355560065132 h1:c/fhgZZq3pJ4YOlmdOOM9ewKkmdkzHy0ojZx3/s6Um4=
 github.com/pepeunlimited/users v0.0.0-20200122110337-355560065132/go.mod h1:RaSueyyvBwcKPWtkxpw8kcOMeg/Ze8ajdub4Er9kIf8=
+github.com/pepeunlimited/users v0.0.0-20200126085421-584885104818 h1:7tBeQ08/oRxnvn5H8ybKDwBgpm7GoqPUMtA5EQPQBKs=
+github.com/pepeunlimited/users v0.0.0-20200126085421-584885104818/go.mod h1:cqAcny6dmAElY2DnqD5PmM6oWluzbsEGW2rNG/owong=
 github.com/pkg/errors v0.8.1 h1:iURUrRGxPUNPdy5/HRSm+Yj6okJ6UtLINN0Q9M4+h3I=
 github.com/pkg/errors v0.8.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=

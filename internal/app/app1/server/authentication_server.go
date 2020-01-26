@@ -2,10 +2,9 @@ package server
 
 import (
 	"context"
-	"github.com/pepeunlimited/authentication-twirp/internal/app/app1/validator"
 	"github.com/pepeunlimited/authentication-twirp/authrpc"
+	"github.com/pepeunlimited/authentication-twirp/internal/app/app1/validator"
 	"github.com/pepeunlimited/microservice-kit/jwt"
-	"github.com/pepeunlimited/microservice-kit/rpcz"
 	"github.com/pepeunlimited/users/credentialsrpc"
 	"github.com/twitchtv/twirp"
 	"log"
@@ -93,11 +92,11 @@ func (server AuthenticationServer) isAccessTokenError(error error) error {
 func (server AuthenticationServer) isJwtError(error error, expired string, malformed string, unknown string) error {
 	switch error {
 	case jwt.ErrExpired:
-		return twirp.NewError(twirp.Unauthenticated, error.Error()).WithMeta(rpcz.Reason, expired)
+		return twirp.NewError(twirp.Unauthenticated, expired)
 	case jwt.ErrMalformed:
-		return twirp.NewError(twirp.Malformed, error.Error()).WithMeta(rpcz.Reason, malformed)
+		return twirp.NewError(twirp.Malformed, malformed)
 	}
-	return twirp.NewError(twirp.Internal, error.Error()).WithMeta(rpcz.Reason, unknown)
+	return twirp.NewError(twirp.Internal, unknown)
 }
 
 func (server AuthenticationServer) SignIn(ctx context.Context, params *authrpc.SignInParams) (*authrpc.SignInResponse, error) {
