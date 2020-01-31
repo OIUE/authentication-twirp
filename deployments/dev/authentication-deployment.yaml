@@ -22,7 +22,7 @@ spec:
               value: v3ry-s3cr3t-k3y-666
             - name: REFRESH_TOKEN_SECRET_KEY
               value: v3ry-s3cr3t-k3y-999
-          image: pepeunlimited/authentication-twirp:0.1.2.8
+          image: pepeunlimited/authentication-twirp:0.1.2.9
           name: authentication-twirp
           ports:
             - containerPort: 8080
