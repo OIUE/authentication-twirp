@@ -1,9 +1,9 @@
-package server
+package twirp
 
 import (
 	"context"
-	"github.com/pepeunlimited/authentication-twirp/authrpc"
-	"github.com/pepeunlimited/authentication-twirp/internal/app/app1/validator"
+	"github.com/pepeunlimited/authentication-twirp/internal/server/validator"
+	"github.com/pepeunlimited/authentication-twirp/pkg/authrpc"
 	"github.com/pepeunlimited/microservice-kit/jwt"
 	"github.com/pepeunlimited/users/credentialsrpc"
 	"github.com/twitchtv/twirp"
@@ -12,10 +12,10 @@ import (
 )
 
 type AuthenticationServer struct {
-	validator 		validator.AuthenticationServerValidator
-	credentials 	credentialsrpc.CredentialsService
-	accessToken 	jwt.JWT
-	refreshToken 	jwt.JWT
+	validator    validator.AuthenticationServerValidator
+	credentials  credentialsrpc.CredentialsService
+	accessToken  jwt.JWT
+	refreshToken jwt.JWT
 }
 
 const (
@@ -133,9 +133,9 @@ func NewAuthenticationServer(accessTokenSecret string,
 	refreshTokenSecret string,
 	credentials credentialsrpc.CredentialsService) AuthenticationServer {
 	return AuthenticationServer{
-		credentials:	credentials,
-		validator: 		validator.NewAuthenticationServerValidator(),
-		accessToken: 	jwt.NewJWT([]byte(accessTokenSecret)),
-		refreshToken: 	jwt.NewJWT([]byte(refreshTokenSecret)),
+		credentials:  credentials,
+		validator:    validator.NewAuthenticationServerValidator(),
+		accessToken:  jwt.NewJWT([]byte(accessTokenSecret)),
+		refreshToken: jwt.NewJWT([]byte(refreshTokenSecret)),
 	}
 }

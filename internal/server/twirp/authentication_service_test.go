@@ -1,9 +1,9 @@
-package server
+package twirp
 
 import (
 	"context"
 	"fmt"
-	"github.com/pepeunlimited/authentication-twirp/authrpc"
+	"github.com/pepeunlimited/authentication-twirp/pkg/authrpc"
 	"github.com/pepeunlimited/microservice-kit/validator"
 	"github.com/pepeunlimited/users/credentialsrpc"
 	"github.com/twitchtv/twirp"

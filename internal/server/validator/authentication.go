@@ -1,7 +1,7 @@
 package validator
 
 import (
-	"github.com/pepeunlimited/authentication-twirp/authrpc"
+	"github.com/pepeunlimited/authentication-twirp/pkg/authrpc"
 	"github.com/pepeunlimited/microservice-kit/validator"
 	"github.com/twitchtv/twirp"
 )

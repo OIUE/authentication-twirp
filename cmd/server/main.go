@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/pepeunlimited/authentication-twirp/internal/app/app1/server"
-	"github.com/pepeunlimited/authentication-twirp/authrpc"
+	"github.com/pepeunlimited/authentication-twirp/internal/server/twirp"
+	"github.com/pepeunlimited/authentication-twirp/pkg/authrpc"
 	"github.com/pepeunlimited/microservice-kit/headers"
 	"github.com/pepeunlimited/microservice-kit/jwt"
 	"github.com/pepeunlimited/microservice-kit/middleware"
@@ -24,7 +24,7 @@ func main() {
 	credentialsAddress := misc.GetEnv(credentialsrpc.RpcCredentialsHost, "http://localhost:8080")
 
 	as := authrpc.NewAuthenticationServiceServer(
-		server.NewAuthenticationServer(accessTokenSecret,
+		twirp.NewAuthenticationServer(accessTokenSecret,
 		refreshTokenSecret,
 			credentialsrpc.NewCredentialsServiceProtobufClient(credentialsAddress,http.DefaultClient)),
 		nil)
