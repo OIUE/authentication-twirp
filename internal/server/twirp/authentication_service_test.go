@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"github.com/pepeunlimited/authentication-twirp/pkg/authrpc"
 	"github.com/pepeunlimited/microservice-kit/validator"
-	"github.com/pepeunlimited/users/credentialsrpc"
+	"github.com/pepeunlimited/users/pkg/credentialsrpc"
 	"github.com/twitchtv/twirp"
 	"log"
 	"testing"

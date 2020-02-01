@@ -7,7 +7,7 @@ import (
 	"github.com/pepeunlimited/microservice-kit/jwt"
 	"github.com/pepeunlimited/microservice-kit/middleware"
 	"github.com/pepeunlimited/microservice-kit/misc"
-	"github.com/pepeunlimited/users/credentialsrpc"
+	"github.com/pepeunlimited/users/pkg/credentialsrpc"
 	"log"
 	"net/http"
 )

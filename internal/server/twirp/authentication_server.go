@@ -5,7 +5,7 @@ import (
 	"github.com/pepeunlimited/authentication-twirp/internal/server/validator"
 	"github.com/pepeunlimited/authentication-twirp/pkg/authrpc"
 	"github.com/pepeunlimited/microservice-kit/jwt"
-	"github.com/pepeunlimited/users/credentialsrpc"
+	"github.com/pepeunlimited/users/pkg/credentialsrpc"
 	"github.com/twitchtv/twirp"
 	"log"
 	"time"

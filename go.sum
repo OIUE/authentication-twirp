@@ -80,6 +80,8 @@ github.com/pepeunlimited/users v0.0.0-20200122110337-355560065132 h1:c/fhgZZq3pJ
 github.com/pepeunlimited/users v0.0.0-20200122110337-355560065132/go.mod h1:RaSueyyvBwcKPWtkxpw8kcOMeg/Ze8ajdub4Er9kIf8=
 github.com/pepeunlimited/users v0.0.0-20200126085421-584885104818 h1:7tBeQ08/oRxnvn5H8ybKDwBgpm7GoqPUMtA5EQPQBKs=
 github.com/pepeunlimited/users v0.0.0-20200126085421-584885104818/go.mod h1:cqAcny6dmAElY2DnqD5PmM6oWluzbsEGW2rNG/owong=
+github.com/pepeunlimited/users v0.0.0-20200201115735-057bb66bdeaa h1:DPAlb7HiZ6QM258TUn/mbMMmIE1+htV9eru6fhYKzfM=
+github.com/pepeunlimited/users v0.0.0-20200201115735-057bb66bdeaa/go.mod h1:cqAcny6dmAElY2DnqD5PmM6oWluzbsEGW2rNG/owong=
 github.com/pkg/errors v0.8.1 h1:iURUrRGxPUNPdy5/HRSm+Yj6okJ6UtLINN0Q9M4+h3I=
 github.com/pkg/errors v0.8.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
