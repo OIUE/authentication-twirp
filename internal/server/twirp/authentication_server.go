@@ -5,7 +5,7 @@ import (
 	"github.com/pepeunlimited/authentication-twirp/internal/server/validator"
 	"github.com/pepeunlimited/authentication-twirp/pkg/rpc/auth"
 	"github.com/pepeunlimited/microservice-kit/jwt"
-	"github.com/pepeunlimited/users/pkg/credentialsrpc"
+	"github.com/pepeunlimited/users/pkg/rpc/credentials"
 	"github.com/twitchtv/twirp"
 	"log"
 	"time"
@@ -13,7 +13,7 @@ import (
 
 type AuthenticationServer struct {
 	validator    validator.AuthenticationServerValidator
-	credentials  credentialsrpc.CredentialsService
+	credentials  credentials.CredentialsService
 	accessToken  jwt.JWT
 	refreshToken jwt.JWT
 }
@@ -105,7 +105,7 @@ func (server AuthenticationServer) SignIn(ctx context.Context, params *auth.Sign
 		return nil, err
 	}
 	// verify does the user exist and etc from users-service
-	user, err := server.credentials.VerifySignIn(ctx, &credentialsrpc.VerifySignInParams{
+	user, err := server.credentials.VerifySignIn(ctx, &credentials.VerifySignInParams{
 		Username: params.Username,
 		Password: params.Password,
 	})
@@ -131,7 +131,7 @@ func (server AuthenticationServer) SignIn(ctx context.Context, params *auth.Sign
 
 func NewAuthenticationServer(accessTokenSecret string,
 	refreshTokenSecret string,
-	credentials credentialsrpc.CredentialsService) AuthenticationServer {
+	credentials credentials.CredentialsService) AuthenticationServer {
 	return AuthenticationServer{
 		credentials:  credentials,
 		validator:    validator.NewAuthenticationServerValidator(),

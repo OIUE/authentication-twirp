@@ -16,6 +16,7 @@ github.com/facebookincubator/ent v0.0.0-20191215171026-58b53892756e/go.mod h1:3C
 github.com/facebookincubator/ent v0.0.0-20191217163758-5e9d13be9747 h1:gXmPRrI5YZbvL8ZdyF7aPc0ZsswM9oK6TxRBrBOqefk=
 github.com/facebookincubator/ent v0.0.0-20191217163758-5e9d13be9747/go.mod h1:3CGvz1m+D78JUti7JFkY6AkKj88McWuT80UcamLqEJQ=
 github.com/facebookincubator/ent v0.0.0-20200105152906-13ae2fcea1b4/go.mod h1:3CGvz1m+D78JUti7JFkY6AkKj88McWuT80UcamLqEJQ=
+github.com/facebookincubator/ent v0.1.2-0.20200205084332-814474815b7d/go.mod h1:HPlhuedKSDmFMBdvuPjio8lFficaUcO4U3eMtVxM2Zs=
 github.com/go-bindata/go-bindata v1.0.1-0.20190711162640-ee3c2418e368/go.mod h1:7xCgX1lzlrXPHkfvn3EhumqHkmSlzt8at9q7v0ax19c=
 github.com/go-ini/ini v1.51.1/go.mod h1:ByCAeIL28uOIIG0E3PJtZPDL8WnHpFKFOtgjp+3Ies8=
 github.com/go-openapi/inflect v0.18.0/go.mod h1:lHpZVlpIQqLyKwJ4N+YSc9hchQy/i12fJykb83CRBH4=
@@ -82,6 +83,10 @@ github.com/pepeunlimited/users v0.0.0-20200126085421-584885104818 h1:7tBeQ08/oRx
 github.com/pepeunlimited/users v0.0.0-20200126085421-584885104818/go.mod h1:cqAcny6dmAElY2DnqD5PmM6oWluzbsEGW2rNG/owong=
 github.com/pepeunlimited/users v0.0.0-20200201115735-057bb66bdeaa h1:DPAlb7HiZ6QM258TUn/mbMMmIE1+htV9eru6fhYKzfM=
 github.com/pepeunlimited/users v0.0.0-20200201115735-057bb66bdeaa/go.mod h1:cqAcny6dmAElY2DnqD5PmM6oWluzbsEGW2rNG/owong=
+github.com/pepeunlimited/users v0.0.0-20200205125550-9be5e479f3ac h1:pwvYjrOKJqISXThLKkNm4XgmoX0c2ollofbrMPa/O/8=
+github.com/pepeunlimited/users v0.0.0-20200205125550-9be5e479f3ac/go.mod h1:uEBuXEIwiZNECFvA8KocIuceq1zV60zbvfWzIgPxoO4=
+github.com/pepeunlimited/users v0.0.0-20200224162352-913b2e2e08f2 h1:IGJ2UB1gWLLnjw3+IZdMFtf5+5mKfZeB8ADM8MuJ2aI=
+github.com/pepeunlimited/users v0.0.0-20200224162352-913b2e2e08f2/go.mod h1:uEBuXEIwiZNECFvA8KocIuceq1zV60zbvfWzIgPxoO4=
 github.com/pkg/errors v0.8.1 h1:iURUrRGxPUNPdy5/HRSm+Yj6okJ6UtLINN0Q9M4+h3I=
 github.com/pkg/errors v0.8.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=

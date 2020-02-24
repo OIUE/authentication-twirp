@@ -7,7 +7,7 @@ import (
 	"github.com/pepeunlimited/microservice-kit/jwt"
 	"github.com/pepeunlimited/microservice-kit/middleware"
 	"github.com/pepeunlimited/microservice-kit/misc"
-	"github.com/pepeunlimited/users/pkg/credentialsrpc"
+	"github.com/pepeunlimited/users/pkg/rpc/credentials"
 	"log"
 	"net/http"
 )
@@ -21,12 +21,12 @@ func main() {
 
 	accessTokenSecret := misc.GetEnv(jwt.AccessTokenSecretKey, "v3ry-s3cr3t-k3y-666")
 	refreshTokenSecret := misc.GetEnv(jwt.RefreshTokenSecretKey, "v3ry-s3cr3t-k3y-999")
-	credentialsAddress := misc.GetEnv(credentialsrpc.RpcCredentialsHost, "http://localhost:8080")
+	credentialsAddress := misc.GetEnv(credentials.RpcCredentialsHost, "http://localhost:8080")
 
 	as := auth.NewAuthenticationServiceServer(
 		twirp.NewAuthenticationServer(accessTokenSecret,
 		refreshTokenSecret,
-			credentialsrpc.NewCredentialsServiceProtobufClient(credentialsAddress,http.DefaultClient)),
+			credentials.NewCredentialsServiceProtobufClient(credentialsAddress,http.DefaultClient)),
 		nil)
 	mux := http.NewServeMux()
 	mux.Handle(as.PathPrefix(), middleware.Adapt(as, headers.Authorizationz()))
