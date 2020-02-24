@@ -1,4 +1,4 @@
-package authrpc
+package auth
 
 import (
 	"context"

@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/pepeunlimited/authentication-twirp/internal/server/twirp"
-	"github.com/pepeunlimited/authentication-twirp/pkg/authrpc"
+	"github.com/pepeunlimited/authentication-twirp/pkg/rpc/auth"
 	"github.com/pepeunlimited/microservice-kit/headers"
 	"github.com/pepeunlimited/microservice-kit/jwt"
 	"github.com/pepeunlimited/microservice-kit/middleware"
@@ -23,7 +23,7 @@ func main() {
 	refreshTokenSecret := misc.GetEnv(jwt.RefreshTokenSecretKey, "v3ry-s3cr3t-k3y-999")
 	credentialsAddress := misc.GetEnv(credentialsrpc.RpcCredentialsHost, "http://localhost:8080")
 
-	as := authrpc.NewAuthenticationServiceServer(
+	as := auth.NewAuthenticationServiceServer(
 		twirp.NewAuthenticationServer(accessTokenSecret,
 		refreshTokenSecret,
 			credentialsrpc.NewCredentialsServiceProtobufClient(credentialsAddress,http.DefaultClient)),

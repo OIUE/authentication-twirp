@@ -1,4 +1,4 @@
-package authrpc
+package auth
 
 const (
 	AccessTokenUnknownError 	= "access_token_unknown_error"

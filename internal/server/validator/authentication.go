@@ -1,7 +1,7 @@
 package validator
 
 import (
-	"github.com/pepeunlimited/authentication-twirp/pkg/authrpc"
+	"github.com/pepeunlimited/authentication-twirp/pkg/rpc/auth"
 	"github.com/pepeunlimited/microservice-kit/validator"
 	"github.com/twitchtv/twirp"
 )
@@ -12,7 +12,7 @@ func NewAuthenticationServerValidator() AuthenticationServerValidator {
 	return AuthenticationServerValidator{}
 }
 
-func (AuthenticationServerValidator) SignIn(params *authrpc.SignInParams) error {
+func (AuthenticationServerValidator) SignIn(params *auth.SignInParams) error {
 	if validator.IsEmpty(params.Password) {
 		return twirp.RequiredArgumentError("password")
 	}
@@ -22,14 +22,14 @@ func (AuthenticationServerValidator) SignIn(params *authrpc.SignInParams) error 
 	return nil
 }
 
-func (AuthenticationServerValidator) RefreshAccessToken(params *authrpc.RefreshAccessTokenParams) error {
+func (AuthenticationServerValidator) RefreshAccessToken(params *auth.RefreshAccessTokenParams) error {
 	if validator.IsEmpty(params.RefreshToken) {
 		return twirp.RequiredArgumentError("refresh_token")
 	}
 	return nil
 }
 
-func (AuthenticationServerValidator) VerifyAccessToken(params *authrpc.VerifyAccessTokenParams) error {
+func (AuthenticationServerValidator) VerifyAccessToken(params *auth.VerifyAccessTokenParams) error {
 	if validator.IsEmpty(params.AccessToken) {
 		return twirp.RequiredArgumentError("access_token")
 	}

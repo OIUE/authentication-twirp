@@ -3,7 +3,7 @@ package twirp
 import (
 	"context"
 	"github.com/pepeunlimited/authentication-twirp/internal/server/validator"
-	"github.com/pepeunlimited/authentication-twirp/pkg/authrpc"
+	"github.com/pepeunlimited/authentication-twirp/pkg/rpc/auth"
 	"github.com/pepeunlimited/microservice-kit/jwt"
 	"github.com/pepeunlimited/users/pkg/credentialsrpc"
 	"github.com/twitchtv/twirp"
@@ -24,7 +24,7 @@ const (
 	newRefreshToken     time.Duration = (24*time.Hour) * 7 // 27
 )
 
-func (server AuthenticationServer) RefreshAccessToken(ctx context.Context, params *authrpc.RefreshAccessTokenParams) (*authrpc.RefreshAccessTokenResponse, error) {
+func (server AuthenticationServer) RefreshAccessToken(ctx context.Context, params *auth.RefreshAccessTokenParams) (*auth.RefreshAccessTokenResponse, error) {
 	if err := server.validator.RefreshAccessToken(params); err != nil {
 		return nil, err
 	}
@@ -38,7 +38,7 @@ func (server AuthenticationServer) RefreshAccessToken(ctx context.Context, param
 		log.Print("authentication-twirp: unknown error during accessToken: "+err.Error())
 		return nil, twirp.InternalErrorWith(err)
 	}
-	resp := &authrpc.RefreshAccessTokenResponse{AccessToken: accessToken}
+	resp := &auth.RefreshAccessTokenResponse{AccessToken: accessToken}
 	// new refresh_token if the refresh token expires in 7d's
 	if server.isRefreshToken(time.Unix(claims.ExpiresAt, 0), newRefreshToken) {
 		refreshToken, err := server.refreshToken.SignIn(refreshTokenExp, claims.Username, claims.Email, claims.Roles, claims.UserId)
@@ -58,7 +58,7 @@ func (server AuthenticationServer) isRefreshToken(expiresAt time.Time, before ti
 	return time.Now().UTC().After(newRefreshTokenAt)
 }
 
-func (server AuthenticationServer) VerifyAccessToken(ctx context.Context, params *authrpc.VerifyAccessTokenParams) (*authrpc.VerifyAccessTokenResponse, error) {
+func (server AuthenticationServer) VerifyAccessToken(ctx context.Context, params *auth.VerifyAccessTokenParams) (*auth.VerifyAccessTokenResponse, error) {
 	err := server.validator.VerifyAccessToken(params)
 	if err != nil {
 		return nil, err
@@ -67,7 +67,7 @@ func (server AuthenticationServer) VerifyAccessToken(ctx context.Context, params
 	if err != nil {
 		return nil, server.isAccessTokenError(err)
 	}
-	resp := &authrpc.VerifyAccessTokenResponse{
+	resp := &auth.VerifyAccessTokenResponse{
 		Username: claims.Username,
 		Roles:    claims.Roles,
 	}
@@ -82,11 +82,11 @@ func (server AuthenticationServer) VerifyAccessToken(ctx context.Context, params
 
 
 func (server AuthenticationServer) isRefreshTokenError(error error) error {
-	return server.isJwtError(error, authrpc.RefreshTokenExpired, authrpc.RefreshTokenMalformed, authrpc.RefreshTokenUnknownError)
+	return server.isJwtError(error, auth.RefreshTokenExpired, auth.RefreshTokenMalformed, auth.RefreshTokenUnknownError)
 }
 
 func (server AuthenticationServer) isAccessTokenError(error error) error {
-	return server.isJwtError(error, authrpc.AccessTokenExpired, authrpc.AccessTokenMalformed, authrpc.AccessTokenUnknownError)
+	return server.isJwtError(error, auth.AccessTokenExpired, auth.AccessTokenMalformed, auth.AccessTokenUnknownError)
 }
 
 func (server AuthenticationServer) isJwtError(error error, expired string, malformed string, unknown string) error {
@@ -99,7 +99,7 @@ func (server AuthenticationServer) isJwtError(error error, expired string, malfo
 	return twirp.NewError(twirp.Internal, unknown)
 }
 
-func (server AuthenticationServer) SignIn(ctx context.Context, params *authrpc.SignInParams) (*authrpc.SignInResponse, error) {
+func (server AuthenticationServer) SignIn(ctx context.Context, params *auth.SignInParams) (*auth.SignInResponse, error) {
 	err := server.validator.SignIn(params)
 	if err != nil {
 		return nil, err
@@ -123,7 +123,7 @@ func (server AuthenticationServer) SignIn(ctx context.Context, params *authrpc.S
 		log.Print("authentication-twirp: unknown error during refreshToken: "+err.Error())
 		return nil, twirp.InternalErrorWith(err)
 	}
-	return &authrpc.SignInResponse{
+	return &auth.SignInResponse{
 		AccessToken:          accessToken,
 		RefreshToken:         refreshToken,
 	}, nil
